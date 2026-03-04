@@ -1,0 +1,3333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Park Plank">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#232D4B">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>The Park Plank App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Source+Sans+3:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --theme-primary: #232D4B;
+    --theme-primary-deep: #1a2238;
+    --theme-primary-light: #2c3a5c;
+    --theme-accent: #E57200;
+    --theme-accent-light: #F59B42;
+    --theme-accent-glow: rgba(229, 114, 0, 0.15);
+    --theme-bg: #FAF7F2;
+    --cubs-blue: #0E3386;
+    --cubs-blue-deep: #091f5c;
+    --cubs-blue-light: #1a4299;
+    --cubs-red: #CC3433;
+    --cubs-red-light: #e04544;
+    --cubs-red-glow: rgba(204, 52, 51, 0.13);
+    --cubs-bg: #F4F6FB;
+    --text-primary: #1a1a2e;
+    --text-secondary: #5a5a7a;
+    --card-bg: rgba(255, 255, 255, 0.88);
+    --card-bg-alt: rgba(237, 238, 244, 0.92);
+    --card-border: rgba(35, 45, 75, 0.08);
+  }
+  body.cubs-theme {
+    --theme-primary: #0E3386;
+    --theme-primary-deep: #091f5c;
+    --theme-primary-light: #1a4299;
+    --theme-accent: #CC3433;
+    --theme-accent-light: #e04544;
+    --theme-accent-glow: rgba(204, 52, 51, 0.13);
+    --theme-bg: #F4F6FB;
+  }
+  body.food-theme {
+    --theme-primary: #5C3D2E;
+    --theme-primary-deep: #3E2518;
+    --theme-primary-light: #7B5544;
+    --theme-accent: #D4722A;
+    --theme-accent-light: #E8944D;
+    --theme-accent-glow: rgba(212, 114, 42, 0.15);
+    --theme-bg: #FBF6F1;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--theme-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.5s ease;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--theme-primary) 0%, var(--theme-primary-deep) 60%, var(--theme-primary-light) 100%);
+    padding: 2rem 2rem 0;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.5s ease;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; right: 2%;
+    width: 420px; height: 220px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 200'%3E%3Cdefs%3E%3ClinearGradient id='fade' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='white' stop-opacity='0'/%3E%3Cstop offset='0.4' stop-color='white' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='1'/%3E%3C/linearGradient%3E%3Cmask id='m'%3E%3Crect width='420' height='200' fill='url(%23fade)'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1.5'%3E%3C!-- base platform --%3E%3Crect x='60' y='175' width='300' height='8' rx='1' fill='rgba(255,255,255,0.04)' stroke='rgba(255,255,255,0.06)'/%3E%3Crect x='50' y='183' width='320' height='6' rx='1' fill='rgba(255,255,255,0.03)' stroke='rgba(255,255,255,0.05)'/%3E%3C!-- steps --%3E%3Crect x='80' y='170' width='260' height='5' rx='1' fill='rgba(255,255,255,0.03)' stroke='rgba(255,255,255,0.05)'/%3E%3C!-- columns --%3E%3Cline x1='110' y1='170' x2='110' y2='105'/%3E%3Cline x1='140' y1='170' x2='140' y2='105'/%3E%3Cline x1='170' y1='170' x2='170' y2='105'/%3E%3Cline x1='210' y1='170' x2='210' y2='105'/%3E%3Cline x1='250' y1='170' x2='250' y2='105'/%3E%3Cline x1='280' y1='170' x2='280' y2='105'/%3E%3Cline x1='310' y1='170' x2='310' y2='105'/%3E%3C!-- entablature --%3E%3Crect x='95' y='100' width='230' height='7' fill='rgba(255,255,255,0.03)' stroke='rgba(255,255,255,0.06)'/%3E%3C!-- pediment triangle --%3E%3Cpolygon points='95,100 210,68 325,100' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.07)'/%3E%3C!-- dome drum --%3E%3Crect x='160' y='55' width='100' height='15' rx='2' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.06)'/%3E%3C!-- small drum columns --%3E%3Cline x1='170' y1='70' x2='170' y2='55'/%3E%3Cline x1='185' y1='70' x2='185' y2='55'/%3E%3Cline x1='200' y1='70' x2='200' y2='55'/%3E%3Cline x1='220' y1='70' x2='220' y2='55'/%3E%3Cline x1='235' y1='70' x2='235' y2='55'/%3E%3Cline x1='250' y1='70' x2='250' y2='55'/%3E%3C!-- dome --%3E%3Cpath d='M158,55 Q160,20 210,10 Q260,20 262,55' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.07)'/%3E%3C!-- lantern --%3E%3Crect x='203' y='5' width='14' height='8' rx='1' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.06)'/%3E%3Cline x1='210' y1='5' x2='210' y2='0' stroke='rgba(255,255,255,0.06)'/%3E%3C!-- side wings --%3E%3Crect x='20' y='140' width='45' height='35' rx='2' fill='rgba(255,255,255,0.015)' stroke='rgba(255,255,255,0.04)'/%3E%3Crect x='355' y='140' width='45' height='35' rx='2' fill='rgba(255,255,255,0.015)' stroke='rgba(255,255,255,0.04)'/%3E%3C!-- wing connections --%3E%3Cline x1='65' y1='155' x2='95' y2='155' stroke='rgba(255,255,255,0.03)'/%3E%3Cline x1='325' y1='155' x2='355' y2='155' stroke='rgba(255,255,255,0.03)'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    opacity: 1;
+    pointer-events: none;
+  }
+  body.cubs-theme .header::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 200'%3E%3Cdefs%3E%3ClinearGradient id='fade' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='white' stop-opacity='0'/%3E%3Cstop offset='0.35' stop-color='white' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='1'/%3E%3C/linearGradient%3E%3Cmask id='m'%3E%3Crect width='420' height='200' fill='url(%23fade)'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1.5'%3E%3Crect x='140' y='30' width='140' height='22' rx='3' fill='rgba(255,255,255,0.03)' stroke='rgba(255,255,255,0.08)'/%3E%3Ctext x='210' y='46' text-anchor='middle' font-family='Georgia,serif' font-size='12' fill='rgba(255,255,255,0.08)'%3EWRIGLEY FIELD%3C/text%3E%3Cline x1='165' y1='52' x2='165' y2='65'/%3E%3Cline x1='255' y1='52' x2='255' y2='65'/%3E%3Crect x='120' y='60' width='180' height='50' rx='2' fill='rgba(255,255,255,0.025)' stroke='rgba(255,255,255,0.07)'/%3E%3Cline x1='150' y1='60' x2='150' y2='110'/%3E%3Cline x1='180' y1='60' x2='180' y2='110'/%3E%3Cline x1='210' y1='60' x2='210' y2='110'/%3E%3Cline x1='240' y1='60' x2='240' y2='110'/%3E%3Cline x1='270' y1='60' x2='270' y2='110'/%3E%3Cline x1='120' y1='80' x2='300' y2='80'/%3E%3Cline x1='120' y1='95' x2='300' y2='95'/%3E%3Cline x1='210' y1='30' x2='210' y2='15'/%3E%3Cpath d='M210,15 L225,20 L210,25' fill='rgba(255,255,255,0.04)' stroke='rgba(255,255,255,0.07)'/%3E%3Cpath d='M30,140 Q100,125 210,120 Q320,125 390,140' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.06)'/%3E%3Ccircle cx='100' cy='133' r='2' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='130' cy='128' r='2.5' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='160' cy='124' r='2' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='190' cy='122' r='2.5' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='230' cy='122' r='2' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='260' cy='124' r='2.5' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='290' cy='128' r='2' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='320' cy='133' r='2.5' fill='rgba(255,255,255,0.03)'/%3E%3Cline x1='50' y1='150' x2='370' y2='150' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='40' y1='162' x2='380' y2='162' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='30' y1='174' x2='390' y2='174' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='20' y1='186' x2='400' y2='186' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='55' y1='140' x2='55' y2='55' stroke='rgba(255,255,255,0.05)'/%3E%3Cline x1='365' y1='140' x2='365' y2='55' stroke='rgba(255,255,255,0.05)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  body.food-theme .header::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 200'%3E%3Cdefs%3E%3ClinearGradient id='fade' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='white' stop-opacity='0'/%3E%3Cstop offset='0.35' stop-color='white' stop-opacity='0.5'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='1'/%3E%3C/linearGradient%3E%3Cmask id='m'%3E%3Crect width='420' height='200' fill='url(%23fade)'/%3E%3C/mask%3E%3C/defs%3E%3Cg mask='url(%23m)' fill='none' stroke='rgba(255,255,255,0.07)' stroke-width='1.5'%3E%3Cpath d='M130,120 Q130,170 210,175 Q290,170 290,120' fill='rgba(255,255,255,0.025)' stroke='rgba(255,255,255,0.07)'/%3E%3Cpath d='M135,120 Q135,75 210,65 Q285,75 285,120' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.07)'/%3E%3Cpath d='M195,65 Q200,55 210,53 Q220,55 225,65' stroke='rgba(255,255,255,0.07)' fill='rgba(255,255,255,0.02)'/%3E%3Cline x1='148' y1='120' x2='272' y2='120' stroke='rgba(255,255,255,0.05)'/%3E%3Cline x1='155' y1='112' x2='265' y2='112' stroke='rgba(255,255,255,0.03)'/%3E%3Cline x1='160' y1='104' x2='260' y2='104' stroke='rgba(255,255,255,0.03)'/%3E%3Cline x1='160' y1='175' x2='140' y2='198' stroke='rgba(255,255,255,0.06)'/%3E%3Cline x1='260' y1='175' x2='280' y2='198' stroke='rgba(255,255,255,0.06)'/%3E%3Cline x1='210' y1='178' x2='210' y2='198' stroke='rgba(255,255,255,0.06)'/%3E%3Ccircle cx='280' cy='198' r='6' stroke='rgba(255,255,255,0.05)' fill='rgba(255,255,255,0.015)'/%3E%3Cline x1='148' y1='192' x2='272' y2='192' stroke='rgba(255,255,255,0.04)'/%3E%3Cpath d='M190,53 Q185,38 190,22 Q192,12 188,5' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1'/%3E%3Cpath d='M210,50 Q215,35 210,18 Q208,8 212,0' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1'/%3E%3Cpath d='M230,53 Q235,40 228,25 Q226,15 230,5' stroke='rgba(255,255,255,0.05)' fill='none' stroke-width='1'/%3E%3Crect x='295' y='115' width='55' height='4' rx='1' fill='rgba(255,255,255,0.02)' stroke='rgba(255,255,255,0.05)'/%3E%3Cline x1='300' y1='119' x2='300' y2='145' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='345' y1='119' x2='345' y2='145' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='310' y1='105' x2='310' y2='115' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='320' y1='102' x2='320' y2='115' stroke='rgba(255,255,255,0.04)'/%3E%3Cline x1='330' y1='107' x2='330' y2='115' stroke='rgba(255,255,255,0.04)'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .header-brand {
+    position: absolute;
+    top: 0.15rem;
+    right: 0;
+    text-align: right;
+  }
+  .brand-the {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--theme-accent);
+    display: block;
+    transition: color 0.5s;
+  }
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.9);
+    display: block;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+  .brand-app {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4.5px;
+    color: var(--theme-accent);
+    display: block;
+    margin-top: 1px;
+    transition: color 0.5s;
+  }
+  .brand-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--theme-accent);
+    opacity: 0.3;
+    margin-top: 2px;
+    transition: background 0.5s;
+  }
+  .greeting {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .greeting .accent {
+    color: var(--theme-accent);
+    transition: color 0.5s;
+  }
+  .date-line {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.3rem;
+    letter-spacing: 0.3px;
+  }
+  .header-bar {
+    width: 48px; height: 3px;
+    background: var(--theme-accent);
+    border-radius: 3px;
+    margin-top: 0.8rem;
+    transition: background 0.5s;
+  }
+
+  /* TABS */
+  .tabs-bar {
+    display: flex;
+    gap: 0;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  .tab-btn {
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    cursor: pointer;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.55);
+    border-radius: 12px 12px 0 0;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    top: 1px;
+  }
+  .tab-btn:hover {
+    background: rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.8);
+  }
+  .tab-btn.active {
+    background: var(--theme-bg);
+    color: var(--theme-primary);
+    transition: background 0.5s, color 0.5s;
+  }
+  .tab-icon { font-size: 1.1rem; line-height: 1; }
+  .cubs-c {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: #CC3433;
+    border: 3px solid #0E3386;
+    outline: 1.5px solid rgba(255,255,255,0.7);
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 900;
+    color: white;
+    line-height: 1;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    letter-spacing: -0.5px;
+    text-indent: -1px;
+  }
+
+  /* UVA BASKETBALL THEME */
+  #panel-uva .game-hero {
+    background: linear-gradient(135deg, #232D4B 0%, #141B2F 100%);
+  }
+  #panel-uva .game-hero::before {
+    background: radial-gradient(circle, rgba(229,114,0,0.18) 0%, transparent 70%);
+  }
+  #panel-uva .game-hero:hover { box-shadow: 0 10px 32px rgba(35,45,75,0.3); }
+  #panel-uva .game-hero-label { color: #E57200; }
+  #panel-uva .batting-section-label { color: #E57200; }
+  #panel-uva .batting-chip {
+    background: rgba(229,114,0,0.12);
+    border: 1px solid rgba(229,114,0,0.25);
+  }
+  #panel-uva .bat-stat { color: #E57200; }
+  #panel-uva .on-deck {
+    border-left-color: #E57200;
+  }
+  #panel-uva .on-deck-badge {
+    background: linear-gradient(135deg, #E57200 0%, #C45F00 100%);
+  }
+  #panel-uva .on-deck-label { color: #E57200; }
+  #panel-uva .rg-badge.win { background: #E57200; }
+  #panel-uva .rg-badge.loss { background: #232D4B; }
+  #panel-uva .section-label { border-left-color: #E57200; }
+  #panel-uva .standings-table tr.uva-row { background: rgba(229,114,0,0.08); }
+  #panel-uva .standings-table tr.uva-row td { color: #E57200; font-weight: 700; }
+  #panel-uva .roster-group-title { color: #E57200; }
+  #panel-uva .roster-player-pos { background: rgba(229,114,0,0.12); color: #E57200; }
+
+  /* HOME SUB-TABS */
+  .home-subtabs {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    background: rgba(35,45,75,0.06);
+    border-radius: 10px;
+    padding: 0.3rem;
+  }
+  .home-subtab {
+    flex: 1;
+    padding: 0.6rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-secondary);
+    transition: all 0.25s;
+  }
+  .home-subtab.active {
+    background: var(--theme-primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(35,45,75,0.2);
+  }
+  .home-subtab:not(.active):hover {
+    background: rgba(35,45,75,0.08);
+  }
+  .home-subpanel { display: none; }
+  .home-subpanel.active { display: block; }
+
+  /* MARKET INDEX CARDS */
+  .index-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
+    margin-bottom: 1.2rem;
+  }
+  .index-card {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 1.2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+  .index-card-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.3rem;
+  }
+  .index-card-price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+  }
+  .index-card-change {
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.15rem 0.5rem;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  .index-card-change.up { color: #2ecc71; background: rgba(46,204,113,0.1); }
+  .index-card-change.down { color: #e74c3c; background: rgba(231,76,60,0.1); }
+  .index-card-change.flat { color: var(--text-secondary); background: rgba(0,0,0,0.04); }
+
+  /* SECTOR PERFORMANCE */
+  .sector-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 0.5rem;
+  }
+  .sector-chip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.8rem;
+    border-radius: 10px;
+    background: var(--card-bg);
+    border: 1px solid rgba(0,0,0,0.04);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+  }
+  .sector-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .sector-change {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+  .sector-change.up { color: #2ecc71; background: rgba(46,204,113,0.1); }
+  .sector-change.down { color: #e74c3c; background: rgba(231,76,60,0.1); }
+  .sector-change.flat { color: var(--text-secondary); }
+
+  /* NEWS CARDS */
+  .news-section-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--theme-accent);
+    margin-bottom: 0.6rem;
+    margin-top: 1.2rem;
+  }
+  .news-section-title:first-child { margin-top: 0; }
+  .news-list { display: flex; flex-direction: column; gap: 0; }
+  .news-item {
+    padding: 0.7rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    text-decoration: none;
+    display: block;
+    transition: background 0.15s;
+  }
+  .news-item:last-child { border-bottom: none; }
+  .news-item:hover { background: rgba(0,0,0,0.02); }
+  .news-headline {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 0.25rem;
+  }
+  .news-meta {
+    font-size: 0.73rem;
+    color: var(--text-secondary);
+  }
+  .news-source { font-weight: 600; }
+  .news-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 0.6rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+  }
+  .news-view-more {
+    display: block;
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.3rem;
+    border: 1px dashed rgba(0,0,0,0.1);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--theme-accent);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .news-view-more:hover { background: rgba(0,0,0,0.02); }
+
+  /* PANELS */
+  .tab-panel {
+    display: none;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem 3rem;
+    animation: panelIn 0.35s ease;
+  }
+  .tab-panel.active { display: block; }
+  @keyframes panelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SHARED */
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--theme-primary);
+    margin-bottom: 1rem;
+    margin-top: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: color 0.5s;
+  }
+  .section-label:first-child { margin-top: 0; }
+  .section-label::before {
+    content: '';
+    width: 4px; height: 20px;
+    background: var(--theme-accent);
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: background 0.5s;
+  }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.4rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(35,45,75,0.08);
+  }
+  .card-animate { animation: cardIn 0.45s ease both; }
+  @keyframes cardIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* WEATHER */
+  .weather-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.1rem;
+  }
+  .weather-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--theme-accent), var(--theme-accent-light));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .weather-card:hover::after { opacity: 1; }
+  .card-city {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--theme-primary);
+    transition: color 0.5s;
+  }
+  .card-state {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .card-temp-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+  }
+  .card-temp {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--theme-primary);
+    line-height: 1;
+    transition: color 0.5s;
+  }
+  .card-temp .unit {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    vertical-align: super;
+    margin-left: 2px;
+  }
+  .card-icon { font-size: 2.6rem; line-height: 1; }
+  .card-condition {
+    font-size: 0.92rem;
+    font-weight: 500;
+    margin-bottom: 0.9rem;
+  }
+  .card-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(35,45,75,0.06);
+  }
+  .detail { display: flex; flex-direction: column; }
+  .detail-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-secondary);
+  }
+  .detail-value { font-size: 0.92rem; font-weight: 600; }
+  .hi-lo { display: flex; gap: 0.7rem; align-items: center; }
+  .hi { color: var(--theme-accent); transition: color 0.5s; }
+  .lo { color: var(--theme-primary-light); transition: color 0.5s; }
+  .hi-lo-divider { width: 1px; height: 13px; background: rgba(35,45,75,0.15); }
+  .card-loading {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 160px; gap: 0.8rem;
+  }
+  .spinner {
+    width: 26px; height: 26px;
+    border: 3px solid rgba(35,45,75,0.1);
+    border-top-color: var(--theme-accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    transition: border-top-color 0.5s;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .card-loading span { font-size: 0.83rem; color: var(--text-secondary); }
+
+  /* ===== CUBS TAB ===== */
+  .games-row {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 1.1rem;
+    align-items: stretch;
+  }
+  .game-hero {
+    background: linear-gradient(135deg, #0E3386 0%, #091f5c 100%);
+    border: none;
+    color: white;
+    padding: 1.6rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .game-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%; right: -15%;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, rgba(204,52,51,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .game-hero:hover { transform: none; box-shadow: 0 10px 32px rgba(14,51,134,0.25); }
+
+  .game-batting-highlights {
+    margin-top: 0.6rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .game-batting-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+  }
+  .batting-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.85);
+    padding: 0.25rem 0.6rem;
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+  }
+  .batting-chip .bat-name { font-weight: 600; color: white; }
+  .batting-chip .bat-stat { font-weight: 400; opacity: 0.7; }
+  .batting-section-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 0.4rem;
+  }
+
+  .game-hero-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #e04544;
+    margin-bottom: 0.8rem;
+  }
+  .game-matchup {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+    position: relative; z-index: 1;
+  }
+  .game-matchup .vs {
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    margin: 0 0.4rem;
+  }
+  .game-info-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1rem;
+    margin-top: 0.8rem;
+    position: relative; z-index: 1;
+  }
+  .game-info-item { display: flex; flex-direction: column; }
+  .game-info-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255,255,255,0.45);
+  }
+  .game-info-value { font-size: 1rem; font-weight: 600; color: white; }
+  .no-game-msg {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.7);
+    padding: 0.8rem 0;
+    position: relative; z-index: 1;
+  }
+
+  .pitchers-lineup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+  .sub-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0E3386;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(204,52,51,0.13);
+  }
+  .pitcher-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .pitcher-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0E3386;
+    opacity: 0.18;
+    line-height: 1;
+    min-width: 35px;
+  }
+  .pitcher-name { font-size: 1rem; font-weight: 600; }
+  .pitcher-stats { font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.1rem; }
+  .team-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+  .team-label.cubs-label { color: #CC3433; }
+  .team-label.opp-label { color: var(--text-secondary); }
+
+  .lineup-list { list-style: none; }
+  .lineup-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid rgba(14,51,134,0.05);
+    font-size: 0.88rem;
+  }
+  .lineup-list li:last-child { border-bottom: none; }
+
+  .lineups-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+  .lineup-col-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.7rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(14,51,134,0.08);
+  }
+  .lineup-team-badge {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+  }
+  .lineup-team-badge.cubs {
+    background: #0E3386;
+    color: white;
+  }
+  .lineup-team-badge.opp {
+    background: rgba(14,51,134,0.08);
+    color: var(--text-primary);
+  }
+  .lineup-team-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  @media (max-width: 700px) {
+    .lineups-grid { grid-template-columns: 1fr; }
+  }
+
+  .lineup-order {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #0E3386;
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .lineup-name { font-weight: 600; }
+  .lineup-pos {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #CC3433;
+    margin-left: auto;
+    text-transform: uppercase;
+  }
+  .lineup-stats {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    margin-left: 0.3rem;
+    white-space: nowrap;
+  }
+
+  .standings-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .standings-table th {
+    text-align: left;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--text-secondary);
+    padding: 0.5rem 0.6rem;
+    border-bottom: 2px solid rgba(14,51,134,0.1);
+  }
+  .standings-table td {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid rgba(14,51,134,0.05);
+  }
+  .standings-table tr.cubs-row {
+    background: rgba(204,52,51,0.08);
+    font-weight: 700;
+  }
+  .standings-table tr.cubs-row td { color: #0E3386; }
+
+  .recent-games-list { display: flex; flex-direction: column; gap: 0.4rem; }
+  .recent-game {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(14,51,134,0.05);
+  }
+  .recent-game:last-child { border-bottom: none; }
+  .rg-badge {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+  .rg-badge.win { background: #27ae60; }
+  .rg-badge.loss { background: #CC3433; }
+  .rg-opponent { font-weight: 600; font-size: 0.88rem; }
+  .rg-score { font-size: 0.88rem; color: var(--text-secondary); margin-left: auto; }
+  .rg-date { font-size: 0.76rem; color: var(--text-secondary); }
+
+  /* On Deck / Tomorrow */
+  .on-deck {
+    background: var(--card-bg-alt);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .on-deck:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(14,51,134,0.08);
+  }
+  .on-deck-top {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .on-deck-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    padding: 0.5rem;
+    background: #0E3386;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .on-deck-badge-day {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1;
+  }
+  .on-deck-badge-date {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+  }
+  .on-deck-body { flex: 1; }
+  .on-deck-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #CC3433;
+    margin-bottom: 0.2rem;
+  }
+  .on-deck-matchup {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #0E3386;
+    line-height: 1.25;
+  }
+  .on-deck-matchup .vs {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin: 0 0.3rem;
+  }
+  .on-deck-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(14,51,134,0.08);
+  }
+  .on-deck-detail {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .on-deck-detail strong {
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .on-deck-pitchers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(14,51,134,0.08);
+  }
+  .on-deck-pitchers-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    margin-bottom: 0.15rem;
+  }
+  .on-deck-pitcher-line {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  .on-deck-pitcher-line strong {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .on-deck-empty {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 0.5rem 0;
+  }
+
+  .roster-group-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0E3386;
+    margin-bottom: 0.4rem;
+  }
+  .roster-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  .roster-player {
+    font-size: 0.84rem;
+    padding: 0.35rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    overflow: hidden;
+    min-width: 0;
+  }
+  .roster-player-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .roster-player-pos { font-size: 0.73rem; font-weight: 700; color: #CC3433; flex-shrink: 0; }
+
+  /* STOCK TICKER */
+
+  /* COMMUTE TILES */
+  .commute-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+  .commute-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .commute-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(35,45,75,0.08);
+  }
+  .commute-header {
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .commute-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: var(--theme-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: background 0.5s;
+  }
+  .commute-dest {
+    flex: 1;
+    min-width: 0;
+  }
+  .commute-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+  }
+  .commute-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--theme-primary);
+    transition: color 0.5s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .commute-map-wrap {
+    width: 100%;
+    height: 220px;
+    position: relative;
+    border-top: 1px solid var(--card-border);
+  }
+  .commute-map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .commute-footer {
+    padding: 0.6rem 1.2rem;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .commute-link {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--theme-accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: color 0.5s;
+  }
+  .commute-link:hover { text-decoration: underline; }
+
+  @media (max-width: 700px) {
+    .commute-grid { grid-template-columns: 1fr; }
+  }
+
+  /* STOCK TICKER */
+  .ticker-wrap {
+    overflow: hidden;
+    background: var(--theme-primary);
+    border-radius: 12px;
+    padding: 0;
+    position: relative;
+    transition: background 0.5s;
+  }
+  .ticker-wrap::before, .ticker-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 40px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .ticker-wrap::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--theme-primary) 0%, transparent 100%);
+  }
+  .ticker-wrap::after {
+    right: 0;
+    background: linear-gradient(-90deg, var(--theme-primary) 0%, transparent 100%);
+  }
+  .ticker-track {
+    display: flex;
+    -webkit-animation: tickerScroll 35s linear infinite;
+    animation: tickerScroll 35s linear infinite;
+    width: -webkit-max-content;
+    width: max-content;
+    will-change: transform;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  .ticker-track:hover { -webkit-animation-play-state: paused; animation-play-state: paused; }
+  @-webkit-keyframes tickerScroll {
+    0% { -webkit-transform: translateX(0); transform: translateX(0); }
+    100% { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+  }
+  @keyframes tickerScroll {
+    0% { -webkit-transform: translateX(0); transform: translateX(0); }
+    100% { -webkit-transform: translateX(-50%); transform: translateX(-50%); }
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.4rem;
+    white-space: nowrap;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    flex-shrink: 0;
+  }
+  .ticker-symbol {
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+  .ticker-price {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+  .ticker-change {
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+  }
+  .ticker-change.up { color: #2ecc71; background: rgba(46,204,113,0.12); }
+  .ticker-change.down { color: #e74c3c; background: rgba(231,76,60,0.12); }
+  .ticker-change.flat { color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+  .ticker-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    gap: 0.6rem;
+  }
+  .ticker-loading span {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .ticker-loading .spinner {
+    width: 16px; height: 16px;
+    border-width: 2px;
+    border-top-color: rgba(255,255,255,0.5);
+  }
+
+  .card-alt {
+    background: var(--card-bg-alt);
+  }
+
+  /* SPORTS SCORES (Home Tab) */
+  .sports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.8rem;
+  }
+  .sport-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+    animation: cardIn 0.45s ease both;
+  }
+  .sport-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(35,45,75,0.08);
+  }
+  .sport-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+  }
+  .sport-card-team {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--theme-primary);
+    transition: color 0.5s;
+  }
+  .sport-card-icon { font-size: 1.1rem; }
+  .sport-game {
+    padding: 0.5rem 0;
+    border-top: 1px solid rgba(35,45,75,0.06);
+  }
+  .sport-game:first-of-type { border-top: none; }
+  .sport-game-status {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 0.25rem;
+  }
+  .sport-game-status.scheduled { color: var(--text-secondary); }
+  .sport-game-status.live { color: #e74c3c; }
+  .sport-game-status.final { color: var(--theme-primary); transition: color 0.5s; }
+  .sport-game-matchup {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .sport-game-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--theme-primary);
+    transition: color 0.5s;
+  }
+  .sport-game-detail {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+  }
+  .sport-no-game {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    padding: 0.2rem 0;
+  }
+
+  /* FOOD TAB */
+  .food-subtabs {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    background: rgba(92,61,46,0.06);
+    border-radius: 10px;
+    padding: 0.3rem;
+  }
+  .food-subtab {
+    flex: 1;
+    padding: 0.6rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-secondary);
+    transition: all 0.25s;
+  }
+  .food-subtab.active {
+    background: var(--theme-primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(92,61,46,0.2);
+  }
+  .food-subtab:not(.active):hover {
+    background: rgba(92,61,46,0.08);
+  }
+  .food-subpanel { display: none; }
+  .food-subpanel.active { display: block; }
+
+  .food-featured {
+    background: linear-gradient(135deg, #5C3D2E 0%, #3E2518 100%);
+    border: none;
+    border-radius: 14px;
+    color: white;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .food-featured::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(212,114,42,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .food-featured-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #E8944D;
+    margin-bottom: 0.6rem;
+    position: relative;
+    z-index: 1;
+  }
+  .food-featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    position: relative;
+    z-index: 1;
+  }
+  .food-featured-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    line-height: 1.5;
+  }
+  .food-featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.55);
+    position: relative;
+    z-index: 1;
+  }
+  .food-featured-meta strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+  .food-featured-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(212,114,42,0.9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: background 0.2s;
+  }
+  .food-featured-btn:hover { background: #D4722A; }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .recipe-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .recipe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(92,61,46,0.1);
+  }
+  .recipe-card-top {
+    padding: 1.1rem 1.2rem 0.8rem;
+    position: relative;
+  }
+  .recipe-fav-btn {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: rgba(0,0,0,0.06);
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.2s, transform 0.2s, background 0.2s;
+    padding: 0.25rem 0.3rem;
+    line-height: 1;
+    z-index: 2;
+    border-radius: 6px;
+  }
+  .recipe-fav-btn:hover { opacity: 0.85; transform: scale(1.15); background: rgba(0,0,0,0.1); }
+  .recipe-fav-btn.favorited { opacity: 1; background: rgba(212,114,42,0.1); }
+  .recipe-card.is-fav .recipe-fav-btn { opacity: 1; }
+  .food-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .food-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    transition: all 0.2s;
+  }
+  .food-filter-btn:hover {
+    border-color: #D4722A;
+    color: #D4722A;
+  }
+  .food-filter-btn.active {
+    background: #D4722A;
+    color: white;
+    border-color: #D4722A;
+  }
+  .food-fav-count {
+    font-size: 0.72rem;
+    font-weight: 700;
+    background: rgba(212,114,42,0.15);
+    color: #D4722A;
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+  .food-filter-btn.active .food-fav-count {
+    background: rgba(255,255,255,0.25);
+    color: white;
+  }
+  .recipe-card-tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #D4722A;
+    margin-bottom: 0.3rem;
+  }
+  .recipe-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    line-height: 1.25;
+  }
+  .recipe-card-blurb {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+  .recipe-card-footer {
+    padding: 0.6rem 1.2rem;
+    border-top: 1px solid var(--card-border);
+    display: flex;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  .recipe-card-footer strong { color: var(--text-primary); font-weight: 600; }
+
+  .recipe-detail {
+    display: none;
+    padding: 0 1.2rem 1.2rem;
+    border-top: 1px solid var(--card-border);
+    animation: cardIn 0.3s ease;
+  }
+  .recipe-detail.open { display: block; }
+  .recipe-detail h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin: 1rem 0 0.5rem;
+    color: var(--theme-primary);
+  }
+  .recipe-detail ul {
+    list-style: none;
+    padding: 0;
+  }
+  .recipe-detail ul li {
+    font-size: 0.85rem;
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+    color: var(--text-primary);
+  }
+  .recipe-detail ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #D4722A;
+    font-weight: 700;
+  }
+  .recipe-detail ol {
+    padding-left: 1.2rem;
+  }
+  .recipe-detail ol li {
+    font-size: 0.85rem;
+    padding: 0.3rem 0;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .recipe-detail ol li::marker {
+    color: #D4722A;
+    font-weight: 700;
+  }
+  .recipe-protip {
+    margin-top: 0.8rem;
+    padding: 0.7rem 1rem;
+    background: rgba(212,114,42,0.08);
+    border-left: 3px solid #D4722A;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+  .recipe-protip strong { color: #D4722A; }
+
+  .tips-section {
+    margin-top: 1.5rem;
+  }
+  .tip-card {
+    background: var(--card-bg-alt);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+  .tip-card-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--theme-primary);
+    margin-bottom: 0.3rem;
+    transition: color 0.5s;
+  }
+  .tip-card-body {
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* PLACEHOLDER */
+  .placeholder-section {
+    background: var(--card-bg);
+    border: 2px dashed rgba(35,45,75,0.12);
+    border-radius: 14px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .ph-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--theme-primary);
+    margin-bottom: 0.3rem;
+  }
+  .ph-sub { font-size: 0.88rem; color: var(--text-secondary); }
+  .ph-ideas {
+    display: flex; flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+  .ph-chip {
+    background: var(--theme-accent-glow);
+    color: var(--theme-accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    transition: background 0.5s, color 0.5s;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 0.73rem;
+    color: var(--text-secondary);
+  }
+  .footer .refresh-btn {
+    background: none; border: none;
+    color: var(--theme-accent);
+    font-weight: 600; cursor: pointer;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.5s;
+  }
+  .footer .refresh-btn:hover { background: var(--theme-accent-glow); }
+
+  @media (max-width: 700px) {
+    .header { padding: 1.5rem 1rem 0; }
+    .header-brand { position: static; text-align: center; margin-bottom: 0.5rem; display: flex; align-items: baseline; justify-content: center; gap: 0.35rem; }
+    .brand-the, .brand-name, .brand-app { display: inline; }
+    .brand-rule { display: none; }
+    .header::before { width: 250px; height: 130px; right: -2%; }
+    .greeting { font-size: 1.5rem; }
+    .tab-panel { padding: 0.8rem 1rem 2rem; }
+    .tabs-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; gap: 0; }
+    .tabs-bar::-webkit-scrollbar { display: none; }
+    .tab-btn { font-size: 0.78rem; padding: 0.6rem 0.9rem; gap: 0.3rem; white-space: nowrap; flex-shrink: 0; }
+    .tab-icon { font-size: 0.85rem; }
+    .cubs-c { width: 18px; height: 18px; font-size: 11px; border-width: 2px; }
+    .weather-grid { grid-template-columns: 1fr; }
+    .pitchers-lineup-grid { grid-template-columns: 1fr; }
+    .games-row { grid-template-columns: 1fr; }
+    .commute-grid { grid-template-columns: 1fr; }
+    .lineups-grid { grid-template-columns: 1fr; }
+    .sports-grid { grid-template-columns: 1fr 1fr; }
+    .recipe-grid { grid-template-columns: 1fr; }
+    .game-matchup { font-size: 1.2rem; }
+    .game-hero { padding: 1.2rem; }
+    .game-info-row { gap: 0.4rem; }
+    .game-info-item { min-width: unset; }
+    .standings-table { font-size: 0.78rem; }
+    .standings-table th { padding: 0.5rem 0.4rem; }
+    .standings-table td { padding: 0.55rem 0.4rem; }
+    .roster-grid { grid-template-columns: 1fr 1fr; }
+    .recent-game { padding: 0.6rem 0; }
+    .rg-score { font-size: 0.85rem; }
+    .on-deck { padding: 1rem; }
+    .on-deck-top { gap: 0.6rem; margin-bottom: 0.7rem; }
+    .on-deck-badge { min-width: 42px; padding: 0.4rem; }
+    .on-deck-badge-date { font-size: 1.1rem; }
+    .on-deck-matchup { font-size: 1.05rem; }
+    .on-deck-details { margin-top: 0.6rem; padding-top: 0.6rem; }
+    .section-label { font-size: 1rem; margin-top: 1.3rem; margin-bottom: 0.6rem; }
+    .card { padding: 1rem; }
+    .home-subtabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .home-subtab { font-size: 0.8rem; padding: 0.5rem 0.8rem; white-space: nowrap; flex-shrink: 0; }
+    .index-cards { grid-template-columns: 1fr; }
+    .index-card { padding: 1rem; }
+    .index-card-price { font-size: 1.2rem; }
+    .sector-grid { grid-template-columns: 1fr 1fr; }
+    .news-headline { font-size: 0.84rem; }
+    .food-featured { padding: 1.2rem; }
+    .food-subtabs { gap: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .food-subtab { font-size: 0.8rem; padding: 0.5rem 0.8rem; white-space: nowrap; flex-shrink: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-content">
+    <div class="header-brand">
+      <span class="brand-the">The</span>
+      <span class="brand-name">Park Plank</span>
+      <span class="brand-app">App</span>
+      <div class="brand-rule"></div>
+    </div>
+    <div class="greeting">Good <span class="accent" id="timeOfDay">morning</span>, Dad.</div>
+    <div class="date-line" id="dateLine"></div>
+    <div class="header-bar"></div>
+    <div class="tabs-bar">
+      <button class="tab-btn active" data-tab="home" onclick="switchTab('home')">
+        <span class="tab-icon">🏠</span> Home
+      </button>
+      <button class="tab-btn" data-tab="cubs" onclick="switchTab('cubs')">
+        <span class="cubs-c">C</span> Hey Hey!
+      </button>
+      <button class="tab-btn" data-tab="uva" onclick="switchTab('uva')">
+        <span class="tab-icon">🏀</span> Hoos
+      </button>
+      <button class="tab-btn" data-tab="food" onclick="switchTab('food')">
+        <span class="tab-icon">🔥</span> What's Cookin'
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="tab-panel active" id="panel-home">
+  <div class="home-subtabs">
+    <button class="home-subtab active" data-hometab="dashboard" onclick="switchHomeTab('dashboard')">📊 Dashboard</button>
+    <button class="home-subtab" data-hometab="markets" onclick="switchHomeTab('markets')">📈 Markets</button>
+    <button class="home-subtab" data-hometab="news" onclick="switchHomeTab('news')">📰 News</button>
+  </div>
+
+  <!-- DASHBOARD SUB-TAB -->
+  <div class="home-subpanel active" id="home-dashboard">
+    <div class="section-label">Weather</div>
+    <div class="weather-grid" id="weatherGrid"></div>
+
+    <div class="section-label" style="margin-top:1.8rem">Scores & Schedule</div>
+    <div class="sports-grid" id="sportsGrid"></div>
+
+    <div class="section-label" style="margin-top:1.8rem">Commute</div>
+    <div class="commute-grid">
+      <div class="commute-card card-animate" style="animation-delay:0.3s">
+        <div class="commute-header">
+          <div class="commute-icon">🏢</div>
+          <div class="commute-dest">
+            <div class="commute-label">Drive to Work</div>
+            <div class="commute-name">Baxter Rd, Chesterfield</div>
+          </div>
+        </div>
+        <div class="commute-map-wrap">
+          <iframe src="https://maps.google.com/maps?saddr=250+Cherry+Hills+Meadows+Drive,+Wildwood,+MO&daddr=17050+Baxter+Rd+%23130,+Chesterfield,+MO+63005&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="commute-footer">
+          <a class="commute-link" href="https://www.google.com/maps/dir/250+Cherry+Hills+Meadows+Drive,+Wildwood,+MO/17050+Baxter+Rd+%23130,+Chesterfield,+MO+63005/" target="_blank" rel="noopener">Open in Maps →</a>
+        </div>
+      </div>
+      <div class="commute-card card-animate" style="animation-delay:0.4s">
+        <div class="commute-header">
+          <div class="commute-icon">📍</div>
+          <div class="commute-dest">
+            <div class="commute-label">Drive to HQ</div>
+            <div class="commute-name">Mt. Sterling, IL</div>
+          </div>
+        </div>
+        <div class="commute-map-wrap">
+          <iframe src="https://maps.google.com/maps?saddr=250+Cherry+Hills+Meadows+Drive,+Wildwood,+MO&daddr=1+Dot+Way,+Mount+Sterling,+IL&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="commute-footer">
+          <a class="commute-link" href="https://www.google.com/maps/dir/250+Cherry+Hills+Meadows+Drive,+Wildwood,+MO/1+Dot+Way,+Mount+Sterling,+IL/" target="_blank" rel="noopener">Open in Maps →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARKETS SUB-TAB -->
+  <div class="home-subpanel" id="home-markets">
+    <div class="section-label" style="margin-top:0">Major Indices</div>
+    <div class="index-cards" id="indexCards">
+      <div class="card-loading" style="grid-column:1/-1;padding:2rem;text-align:center"><div class="spinner" style="margin:0 auto"></div><span style="display:block;margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem">Loading market data…</span></div>
+    </div>
+
+    <div class="section-label" style="margin-top:1.5rem">Ticker</div>
+    <div class="ticker-wrap" id="tickerWrap">
+      <div class="ticker-loading"><div class="spinner" style="border-top-color:rgba(255,255,255,0.5)"></div><span>Loading market data…</span></div>
+    </div>
+
+    <div class="section-label" style="margin-top:1.5rem">Sector Performance</div>
+    <div class="card" id="sectorPerf">
+      <div class="card-loading"><div class="spinner"></div><span>Loading sectors…</span></div>
+    </div>
+  </div>
+
+  <!-- NEWS SUB-TAB -->
+  <div class="home-subpanel" id="home-news">
+    <div class="card" id="newsContent">
+      <div class="news-loading"><div class="spinner"></div><span>Loading news…</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CUBS -->
+<div class="tab-panel" id="panel-cubs">
+  <div class="games-row">
+    <div id="cubsGameHero" class="card game-hero card-animate" style="animation-delay:0.05s">
+      <div class="card-loading"><div class="spinner" style="border-top-color:#CC3433"></div><span style="color:rgba(255,255,255,0.6)">Loading today's game…</span></div>
+    </div>
+    <div id="cubsTomorrow" class="card-animate" style="animation-delay:0.1s"></div>
+  </div>
+
+  <div id="cubsLineupSection" style="display:none">
+    <div class="section-label">Starting Lineups</div>
+    <div class="lineups-grid">
+      <div class="card card-alt card-animate" id="cubsLineupHome" style="animation-delay:0.15s">
+        <div class="card-loading"><div class="spinner"></div><span>Loading Cubs lineup…</span></div>
+      </div>
+      <div class="card card-alt card-animate" id="cubsLineupAway" style="animation-delay:0.2s">
+        <div class="card-loading"><div class="spinner"></div><span>Loading opponent lineup…</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">NL Central Standings</div>
+  <div class="card card-animate" id="cubsStandings" style="animation-delay:0.25s">
+    <div class="card-loading"><div class="spinner"></div><span>Loading standings…</span></div>
+  </div>
+
+  <div class="section-label">Recent Results</div>
+  <div class="card card-animate" id="cubsRecent" style="animation-delay:0.3s">
+    <div class="card-loading"><div class="spinner"></div><span>Loading recent games…</span></div>
+  </div>
+
+  <div class="section-label">40-Man Roster</div>
+  <div class="card card-animate" id="cubsRoster" style="animation-delay:0.35s">
+    <div class="card-loading"><div class="spinner"></div><span>Loading roster…</span></div>
+  </div>
+</div>
+
+<!-- UVA BASKETBALL -->
+<div class="tab-panel" id="panel-uva">
+  <div class="games-row">
+    <div id="uvaGameHero" class="card game-hero card-animate" style="animation-delay:0.05s">
+      <div class="card-loading"><div class="spinner" style="border-top-color:#E57200"></div><span style="color:rgba(255,255,255,0.6)">Loading last game…</span></div>
+    </div>
+    <div id="uvaNextGame" class="card-animate" style="animation-delay:0.1s"></div>
+  </div>
+
+  <div class="section-label">ACC Standings</div>
+  <div class="card card-animate" id="uvaStandings" style="animation-delay:0.2s">
+    <div class="card-loading"><div class="spinner"></div><span>Loading standings…</span></div>
+  </div>
+
+  <div class="section-label">Last 5 Games</div>
+  <div class="card card-animate" id="uvaRecent" style="animation-delay:0.25s">
+    <div class="card-loading"><div class="spinner"></div><span>Loading recent games…</span></div>
+  </div>
+
+  <div class="section-label">Roster</div>
+  <div class="card card-animate" id="uvaRoster" style="animation-delay:0.3s">
+    <div class="card-loading"><div class="spinner"></div><span>Loading roster…</span></div>
+  </div>
+</div>
+
+<!-- FOOD -->
+<div class="tab-panel" id="panel-food">
+  <div class="food-subtabs">
+    <button class="food-subtab active" data-foodtab="smoker" onclick="switchFoodTab('smoker')">🪵 Smoker</button>
+    <button class="food-subtab" data-foodtab="grill" onclick="switchFoodTab('grill')">🔥 Grill</button>
+    <button class="food-subtab" data-foodtab="kitchen" onclick="switchFoodTab('kitchen')">🍳 In the Kitchen</button>
+  </div>
+
+  <div class="food-subpanel active" id="food-smoker">
+    <div id="smokerFeatured"></div>
+    <div class="food-filter-bar">
+      <div class="section-label" style="margin:0;flex:1">Recipes</div>
+      <button class="food-filter-btn" id="smokerFavFilter" onclick="toggleFavFilter('smoker')">❤️ Favorites <span class="food-fav-count" id="smokerFavCount">0</span></button>
+    </div>
+    <div class="recipe-grid" id="smokerRecipes"></div>
+    <div class="tips-section" id="smokerTips"></div>
+  </div>
+
+  <div class="food-subpanel" id="food-grill">
+    <div id="grillFeatured"></div>
+    <div class="food-filter-bar">
+      <div class="section-label" style="margin:0;flex:1">Recipes</div>
+      <button class="food-filter-btn" id="grillFavFilter" onclick="toggleFavFilter('grill')">❤️ Favorites <span class="food-fav-count" id="grillFavCount">0</span></button>
+    </div>
+    <div class="recipe-grid" id="grillRecipes"></div>
+    <div class="tips-section" id="grillTips"></div>
+  </div>
+
+  <div class="food-subpanel" id="food-kitchen">
+    <div id="kitchenFeatured"></div>
+    <div class="food-filter-bar">
+      <div class="section-label" style="margin:0;flex:1">Recipes</div>
+      <button class="food-filter-btn" id="kitchenFavFilter" onclick="toggleFavFilter('kitchen')">❤️ Favorites <span class="food-fav-count" id="kitchenFavCount">0</span></button>
+    </div>
+    <div class="recipe-grid" id="kitchenRecipes"></div>
+    <div class="tips-section" id="kitchenTips"></div>
+  </div>
+</div>
+
+<div class="footer">
+  <span id="lastUpdated"></span> &middot;
+  <button class="refresh-btn" onclick="refreshAll()">↻ Refresh</button>
+</div>
+
+<script>
+const CUBS_ID = 112;
+const CITIES = [
+  { name:"Wildwood", state:"Missouri", lat:38.5829, lon:-90.6615 },
+  { name:"Charlottesville", state:"Virginia", lat:38.0293, lon:-78.4767 },
+  { name:"Chicago", state:"Illinois", lat:41.8781, lon:-87.6298 },
+  { name:"Denver", state:"Colorado", lat:39.7392, lon:-104.9903 }
+];
+const WMO = {
+  0:{d:"Clear sky",i:"☀️"},1:{d:"Mainly clear",i:"🌤️"},2:{d:"Partly cloudy",i:"⛅"},
+  3:{d:"Overcast",i:"☁️"},45:{d:"Fog",i:"🌫️"},48:{d:"Rime fog",i:"🌫️"},
+  51:{d:"Light drizzle",i:"🌦️"},53:{d:"Drizzle",i:"🌦️"},55:{d:"Dense drizzle",i:"🌧️"},
+  56:{d:"Freezing drizzle",i:"🌧️"},57:{d:"Heavy freezing drizzle",i:"🌧️"},
+  61:{d:"Light rain",i:"🌦️"},63:{d:"Rain",i:"🌧️"},65:{d:"Heavy rain",i:"🌧️"},
+  66:{d:"Freezing rain",i:"🧊"},67:{d:"Heavy freezing rain",i:"🧊"},
+  71:{d:"Light snow",i:"🌨️"},73:{d:"Snow",i:"❄️"},75:{d:"Heavy snow",i:"❄️"},
+  77:{d:"Snow grains",i:"❄️"},80:{d:"Light showers",i:"🌦️"},81:{d:"Showers",i:"🌧️"},
+  82:{d:"Heavy showers",i:"⛈️"},85:{d:"Snow showers",i:"🌨️"},86:{d:"Heavy snow showers",i:"❄️"},
+  95:{d:"Thunderstorm",i:"⛈️"},96:{d:"T-storm w/ hail",i:"⛈️"},99:{d:"T-storm w/ heavy hail",i:"⛈️"}
+};
+
+// === TABS ===
+function switchTab(id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`[data-tab="${id}"]`).classList.add('active');
+  document.getElementById(`panel-${id}`).classList.add('active');
+  document.body.classList.toggle('cubs-theme', id === 'cubs');
+  document.body.classList.toggle('food-theme', id === 'food');
+}
+
+// === HEADER ===
+function updateHeader() {
+  const h = new Date().getHours();
+  document.getElementById("timeOfDay").textContent = h < 12 ? "morning" : h < 17 ? "afternoon" : "evening";
+  document.getElementById("dateLine").textContent = new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+
+// === WEATHER ===
+function windDir(d) { return ["N","NE","E","SE","S","SW","W","NW"][Math.round(d/45)%8]; }
+
+async function loadWeather() {
+  const grid = document.getElementById("weatherGrid");
+  grid.innerHTML = CITIES.map(c => `<div class="card weather-card card-animate"><div class="card-city">${c.name}</div><div class="card-state">${c.state}</div><div class="card-loading"><div class="spinner"></div><span>Loading…</span></div></div>`).join('');
+  const cards = await Promise.all(CITIES.map(async c => {
+    try {
+      const r = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,wind_direction_10m&daily=temperature_2m_max,temperature_2m_min&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto&forecast_days=1`);
+      const data = await r.json();
+      const cur = data.current, day = data.daily;
+      const w = WMO[cur.weather_code] || {d:"Unknown",i:"🌡️"};
+      return `<div class="card weather-card card-animate">
+        <div class="card-city">${c.name}</div><div class="card-state">${c.state}</div>
+        <div class="card-temp-row"><div class="card-temp">${Math.round(cur.temperature_2m)}<span class="unit">°F</span></div><div class="card-icon">${w.i}</div></div>
+        <div class="card-condition">${w.d}</div>
+        <div class="card-details">
+          <div class="detail"><span class="detail-label">Hi / Lo</span><div class="hi-lo"><span class="detail-value hi">${Math.round(day.temperature_2m_max[0])}°</span><span class="hi-lo-divider"></span><span class="detail-value lo">${Math.round(day.temperature_2m_min[0])}°</span></div></div>
+          <div class="detail"><span class="detail-label">Feels Like</span><span class="detail-value">${Math.round(cur.apparent_temperature)}°F</span></div>
+          <div class="detail"><span class="detail-label">Humidity</span><span class="detail-value">${cur.relative_humidity_2m}%</span></div>
+          <div class="detail"><span class="detail-label">Wind</span><span class="detail-value">${Math.round(cur.wind_speed_10m)} mph ${windDir(cur.wind_direction_10m)}</span></div>
+        </div></div>`;
+    } catch { return `<div class="card weather-card"><div class="card-city">${c.name}</div><div class="card-state">${c.state}</div><div style="color:var(--text-secondary);text-align:center;padding:2rem 0;font-size:0.85rem;">⚠ Could not load weather</div></div>`; }
+  }));
+  grid.innerHTML = cards.join('');
+}
+
+// === CUBS: Helpers ===
+function todayStr() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function fmtTimeCT(iso) { try { return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/Chicago'}) + ' CT'; } catch { return 'TBD'; } }
+function getBroadcast(bc) {
+  if (!bc || !bc.length) return 'TBD';
+  const nat = bc.filter(b => b.type==='national'||b.isNational);
+  if (nat.length) return nat.map(b=>b.callSign||b.name).join(', ');
+  return bc.map(b=>b.callSign||b.name).join(', ') || 'TBD';
+}
+
+// === CUBS: Today's Game ===
+async function loadCubsGame() {
+  const hero = document.getElementById("cubsGameHero");
+  try {
+    const url = `https://statsapi.mlb.com/api/v1/schedule?teamId=${CUBS_ID}&date=${todayStr()}&sportId=1&hydrate=team,broadcasts,probablePitcher(stats(type=season)),linescore,decisions(stats(type=season))`;
+    const data = await (await fetch(url)).json();
+    const games = data.dates?.[0]?.games || [];
+
+    if (!games.length) {
+      hero.innerHTML = `<div class="game-hero-label">Today · ${new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}</div><div class="no-game-msg">⚾ No game scheduled today</div>`;
+      try {
+        const end = new Date(Date.now()+10*864e5).toISOString().slice(0,10);
+        const nData = await (await fetch(`https://statsapi.mlb.com/api/v1/schedule?teamId=${CUBS_ID}&startDate=${todayStr()}&endDate=${end}&sportId=1&hydrate=team,broadcasts,probablePitcher`)).json();
+        for (const d of (nData.dates||[])) {
+          for (const g of d.games) {
+            if (new Date(g.gameDate) > new Date()) {
+              const ih = g.teams.home.team.id===CUBS_ID;
+              const opp = ih ? g.teams.away.team.teamName : g.teams.home.team.teamName;
+              hero.innerHTML += `<div style="margin-top:0.8rem;font-size:0.9rem;color:rgba(255,255,255,0.65)">Next: <strong>Cubs vs ${opp}</strong> — ${new Date(g.gameDate).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}, ${fmtTimeCT(g.gameDate)}</div>`;
+              return [];
+            }
+          }
+        }
+      } catch {}
+      return [];
+    }
+
+    const g = games[0];
+    const ih = g.teams.home.team.id === CUBS_ID;
+    const opp = ih ? g.teams.away.team.teamName : g.teams.home.team.teamName;
+    const loc = ih ? 'Home · Wrigley Field' : 'Away · ' + (g.venue?.name||'');
+    const status = g.status.detailedState;
+    const isFinal = status.includes('Final');
+    const isLive = status.includes('Progress');
+
+    // Score row
+    let scoreHtml = '';
+    if (g.linescore && (isLive || isFinal)) {
+      const as = g.teams.away.score??0, hs = g.teams.home.score??0;
+      const lbl = isFinal ? 'Final' : `${g.linescore.isTopInning?'Top':'Bot'} ${g.linescore.currentInningOrdinal||''}`;
+      scoreHtml = `<div class="game-info-item"><span class="game-info-label">${lbl}</span><span class="game-info-value">${g.teams.away.team.abbreviation} ${as} – ${g.teams.home.team.abbreviation} ${hs}</span></div>`;
+    }
+
+    // Pitching info — context-aware
+    let pitchingHtml = '';
+    let battingHtml = '';
+    if (isFinal && g.decisions) {
+      // Game over: show W/L/Sv pitchers (no ERA)
+      const fmtDecision = (p, label) => {
+        if (!p) return '';
+        return `<div class="game-info-item"><span class="game-info-label">${label}</span><span class="game-info-value">${p.fullName}</span></div>`;
+      };
+      pitchingHtml = fmtDecision(g.decisions.winner, 'W') + fmtDecision(g.decisions.loser, 'L');
+      if (g.decisions.save) pitchingHtml += fmtDecision(g.decisions.save, 'SV');
+
+      // Fetch Cubs batting highlights (HR, RBI)
+      try {
+        const boxUrl = `https://statsapi.mlb.com/api/v1.1/game/${g.gamePk}/feed/live`;
+        const boxData = await (await fetch(boxUrl)).json();
+        const side = ih ? 'home' : 'away';
+        const players = boxData.liveData?.boxscore?.teams?.[side]?.players || {};
+        const hrPlayers = [];
+        const rbiPlayers = [];
+
+        for (const [key, p] of Object.entries(players)) {
+          const batting = p.stats?.batting;
+          if (!batting) continue;
+          const name = p.person?.fullName || '';
+          const lastName = name.split(' ').slice(-1)[0];
+          if (batting.homeRuns > 0) {
+            hrPlayers.push({ name: lastName, hr: batting.homeRuns });
+          }
+          if (batting.rbi > 0) {
+            rbiPlayers.push({ name: lastName, rbi: batting.rbi });
+          }
+        }
+
+        rbiPlayers.sort((a, b) => b.rbi - a.rbi);
+
+        let highlights = '';
+        if (hrPlayers.length) {
+          highlights += `<div style="margin-bottom:${rbiPlayers.length ? '0.5rem' : '0'}"><div class="batting-section-label">💣 Home Runs</div><div class="game-batting-row">`;
+          highlights += hrPlayers.map(p => `<span class="batting-chip"><span class="bat-name">${p.name}</span>${p.hr > 1 ? `<span class="bat-stat">×${p.hr}</span>` : ''}</span>`).join('');
+          highlights += `</div></div>`;
+        }
+        if (rbiPlayers.length) {
+          highlights += `<div><div class="batting-section-label">📊 RBI</div><div class="game-batting-row">`;
+          highlights += rbiPlayers.map(p => `<span class="batting-chip"><span class="bat-name">${p.name}</span><span class="bat-stat">${p.rbi} RBI</span></span>`).join('');
+          highlights += `</div></div>`;
+        }
+        if (highlights) {
+          battingHtml = `<div class="game-batting-highlights">${highlights}</div>`;
+        }
+      } catch {}
+
+    } else if (!isFinal && !isLive) {
+      // Pre-game: show probable pitchers
+      const cp = ih ? g.teams.home.probablePitcher : g.teams.away.probablePitcher;
+      const op = ih ? g.teams.away.probablePitcher : g.teams.home.probablePitcher;
+      const oppAbbr = ih ? g.teams.away.team.abbreviation : g.teams.home.team.abbreviation;
+      const fmtProb = (p, team) => {
+        if (!p) return `<div class="game-info-item"><span class="game-info-label">${team} SP</span><span class="game-info-value">TBD</span></div>`;
+        const s = p.stats?.[0]?.stats;
+        const era = s ? s.era : '-';
+        return `<div class="game-info-item"><span class="game-info-label">${team} SP</span><span class="game-info-value">${p.fullName} <span style="font-weight:400;font-size:0.82rem;opacity:0.7">(${era} ERA)</span></span></div>`;
+      };
+      pitchingHtml = fmtProb(cp, 'CHC') + fmtProb(op, oppAbbr);
+    }
+
+    hero.innerHTML = `
+      <div class="game-hero-label">${isFinal ? "Today's Result" : isLive ? "Live Now" : "Today's Game"} · ${new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}</div>
+      <div class="game-matchup">Cubs <span class="vs">vs</span> ${opp}</div>
+      <div class="game-info-row">
+        ${scoreHtml}
+        <div class="game-info-item"><span class="game-info-label">${isFinal ? 'Game Time' : 'First Pitch'}</span><span class="game-info-value">${fmtTimeCT(g.gameDate)}</span></div>
+        <div class="game-info-item"><span class="game-info-label">Where</span><span class="game-info-value">${loc}</span></div>
+        <div class="game-info-item"><span class="game-info-label">TV</span><span class="game-info-value">${getBroadcast(g.broadcasts)}</span></div>
+        ${g.teams.home.leagueRecord ? `<div class="game-info-item"><span class="game-info-label">Record</span><span class="game-info-value">${ih?g.teams.home.leagueRecord.wins+'-'+g.teams.home.leagueRecord.losses:g.teams.away.leagueRecord.wins+'-'+g.teams.away.leagueRecord.losses}</span></div>` : ''}
+      </div>
+      ${pitchingHtml ? `<div class="game-info-row" style="margin-top:0.6rem;padding-top:0.7rem;border-top:1px solid rgba(255,255,255,0.1)">${pitchingHtml}</div>` : ''}
+      ${battingHtml}`;
+    return games;
+  } catch {
+    hero.innerHTML = `<div class="game-hero-label">Today</div><div class="no-game-msg">⚠ Could not load game info</div>`;
+    return [];
+  }
+}
+
+// === CUBS: Starting Lineups (1hr before game, hidden after final) ===
+async function loadCubsLineup() {
+  const section = document.getElementById("cubsLineupSection");
+  const cubsEl = document.getElementById("cubsLineupHome");
+  const oppEl = document.getElementById("cubsLineupAway");
+  try {
+    const data = await (await fetch('https://statsapi.mlb.com/api/v1/schedule?teamId=' + CUBS_ID + '&date=' + todayStr() + '&sportId=1&hydrate=team')).json();
+    const g = data.dates?.[0]?.games?.[0];
+    if (!g) { section.style.display = 'none'; return; }
+
+    const gameTime = new Date(g.gameDate);
+    const now = new Date();
+    const status = g.status?.detailedState || '';
+    const isLive = status.includes('Progress');
+    const isFinal = status.includes('Final');
+    const msUntilGame = gameTime - now;
+    const oneHour = 60 * 60 * 1000;
+
+    // Only show 1hr before through live; hide before that and after final
+    if (isFinal || (msUntilGame > oneHour && !isLive)) {
+      section.style.display = 'none';
+      return;
+    }
+
+    section.style.display = 'block';
+
+    const ih = g.teams.home.team.id === CUBS_ID;
+    const oppTeamName = ih ? g.teams.away.team.teamName : g.teams.home.team.teamName;
+    const oppAbbr = ih ? g.teams.away.team.abbreviation : g.teams.home.team.abbreviation;
+
+    try {
+      const live = await (await fetch('https://statsapi.mlb.com/api/v1.1/game/' + g.gamePk + '/feed/live')).json();
+      const homeOrder = live.liveData?.boxscore?.teams?.home?.battingOrder || [];
+      const homePlayers = live.liveData?.boxscore?.teams?.home?.players || {};
+      const awayOrder = live.liveData?.boxscore?.teams?.away?.battingOrder || [];
+      const awayPlayers = live.liveData?.boxscore?.teams?.away?.players || {};
+
+      const cubsOrder = ih ? homeOrder : awayOrder;
+      const cubsPlayers = ih ? homePlayers : awayPlayers;
+      const oppOrder = ih ? awayOrder : homeOrder;
+      const oppPlayers = ih ? awayPlayers : homePlayers;
+
+      function getStatLine(p) {
+        var ss = p.seasonStats?.batting;
+        if (ss && (ss.avg !== '.000' || parseInt(ss.hits||0) > 0 || parseInt(ss.atBats||0) > 0)) {
+          return ss.avg + ' | ' + ss.homeRuns + ' HR | ' + ss.rbi + ' RBI | ' + ss.ops + ' OPS';
+        }
+        return '';
+      }
+
+      function renderLineupCard(order, players, badgeClass, abbr, name) {
+        var header = '<div class="lineup-col-header"><span class="lineup-team-badge ' + badgeClass + '">' + abbr + '</span><span class="lineup-team-name">' + name + '</span></div>';
+        if (!order.length) return header + '<div style="color:var(--text-secondary);font-size:0.88rem;padding:0.5rem 0">Not yet posted</div>';
+        var items = '';
+        order.forEach(function(pid, i) {
+          var p = players['ID' + pid];
+          if (p) {
+            var stats = getStatLine(p);
+            var statsHtml = stats ? '<div class="lineup-stats">' + stats + '</div>' : '';
+            items += '<li><span class="lineup-order">' + (i+1) + '</span><div style="flex:1;min-width:0"><div style="display:flex;align-items:center;gap:0.4rem"><span class="lineup-name">' + p.person.fullName + '</span><span class="lineup-pos">' + p.position.abbreviation + '</span></div>' + statsHtml + '</div></li>';
+          }
+        });
+        return header + '<ul class="lineup-list">' + items + '</ul>';
+      }
+
+      cubsEl.innerHTML = renderLineupCard(cubsOrder, cubsPlayers, 'cubs', 'CHC', 'Cubs');
+      oppEl.innerHTML = renderLineupCard(oppOrder, oppPlayers, 'opp', oppAbbr, oppTeamName);
+      return;
+    } catch {}
+
+    cubsEl.innerHTML = '<div class="lineup-col-header"><span class="lineup-team-badge cubs">CHC</span><span class="lineup-team-name">Cubs</span></div><div style="color:var(--text-secondary);font-size:0.9rem;padding:0.8rem 0">Lineups not yet posted</div>';
+    oppEl.innerHTML = '<div class="lineup-col-header"><span class="lineup-team-badge opp">OPP</span><span class="lineup-team-name">Opponent</span></div><div style="color:var(--text-secondary);font-size:0.9rem;padding:0.8rem 0">Lineups not yet posted</div>';
+  } catch {
+    section.style.display = 'none';
+  }
+}
+
+
+// === CUBS: Standings ===
+async function loadCubsStandings() {
+  const el = document.getElementById("cubsStandings");
+  try {
+    const yr = new Date().getFullYear();
+    const data = await (await fetch(`https://statsapi.mlb.com/api/v1/standings?leagueId=104&season=${yr}&standingsTypes=regularSeason&hydrate=team`)).json();
+    const central = data.records.find(r => r.division && (r.division.nameShort==='NL Central' || r.division.id===205));
+    if (!central || !central.teamRecords.length) { el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.9rem">Standings not yet available for ${yr}</div>`; return; }
+    central.teamRecords.sort((a,b) => (a.divisionRank||99)-(b.divisionRank||99));
+    let rows = central.teamRecords.map(t => {
+      const ic = t.team.id===CUBS_ID;
+      const gb = t.divisionGamesBack==='-'||t.divisionGamesBack==='0'?'—':t.divisionGamesBack;
+      const sk = t.streak?.streakCode||'-';
+      const l10 = t.records?.splitRecords?.find(s=>s.type==='lastTen');
+      return `<tr class="${ic?'cubs-row':''}"><td>${t.team.teamName}</td><td>${t.wins}</td><td>${t.losses}</td><td>${t.winningPercentage}</td><td>${gb}</td><td>${sk}</td><td>${l10?l10.wins+'-'+l10.losses:'-'}</td></tr>`;
+    }).join('');
+    el.innerHTML = `<table class="standings-table"><thead><tr><th>Team</th><th>W</th><th>L</th><th>PCT</th><th>GB</th><th>STRK</th><th>L10</th></tr></thead><tbody>${rows}</tbody></table>`;
+  } catch { el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load standings</div>`; }
+}
+
+// === CUBS: Recent Games ===
+async function loadCubsRecent() {
+  const el = document.getElementById("cubsRecent");
+  try {
+    const start = new Date(Date.now()-14*864e5).toISOString().slice(0,10);
+    const data = await (await fetch(`https://statsapi.mlb.com/api/v1/schedule?teamId=${CUBS_ID}&startDate=${start}&endDate=${todayStr()}&sportId=1&hydrate=team,linescore`)).json();
+    let games = [];
+    (data.dates||[]).forEach(d => d.games.forEach(g => { if (g.status.detailedState.includes('Final')) games.push(g); }));
+    games = games.slice(-7).reverse();
+    if (!games.length) { el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.9rem">No recent completed games</div>`; return; }
+    el.innerHTML = '<div class="recent-games-list">' + games.map(g => {
+      const ih = g.teams.home.team.id===CUBS_ID;
+      const cs = ih?g.teams.home.score:g.teams.away.score;
+      const os = ih?g.teams.away.score:g.teams.home.score;
+      const opp = ih?g.teams.away.team.abbreviation:g.teams.home.team.abbreviation;
+      const won = ih?g.teams.home.isWinner:g.teams.away.isWinner;
+      const dt = new Date(g.gameDate).toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      return `<div class="recent-game"><div class="rg-badge ${won?'win':'loss'}">${won?'W':'L'}</div><div><div class="rg-opponent">${ih?'vs':'@'} ${opp}</div><div class="rg-date">${dt}</div></div><div class="rg-score">${cs} – ${os}</div></div>`;
+    }).join('') + '</div>';
+  } catch { el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load recent games</div>`; }
+}
+
+// === CUBS: Roster ===
+async function loadCubsRoster() {
+  const el = document.getElementById("cubsRoster");
+  try {
+    const data = await (await fetch(`https://statsapi.mlb.com/api/v1/teams/${CUBS_ID}/roster?rosterType=40Man`)).json();
+    if (!data.roster?.length) { el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.9rem">Roster not available</div>`; return; }
+    const groups = { Pitchers:[], Catchers:[], Infielders:[], Outfielders:[] };
+    data.roster.forEach(p => {
+      const t = p.position.type;
+      if (t==='Pitcher') groups.Pitchers.push(p);
+      else if (t==='Catcher') groups.Catchers.push(p);
+      else if (t==='Infielder') groups.Infielders.push(p);
+      else if (t==='Outfielder') groups.Outfielders.push(p);
+      else groups.Infielders.push(p);
+    });
+    let html = '';
+    for (const [name, players] of Object.entries(groups)) {
+      if (!players.length) continue;
+      players.sort((a,b) => a.person.fullName.localeCompare(b.person.fullName));
+      html += `<div class="roster-group-title">${name}</div><div class="roster-grid">${players.map(p => `<div class="roster-player"><span class="roster-player-name">#${p.jerseyNumber||'?'} ${p.person.fullName}</span><span class="roster-player-pos">${p.position.abbreviation}</span></div>`).join('')}</div>`;
+    }
+    el.innerHTML = html;
+  } catch { el.innerHTML = `<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load roster</div>`; }
+}
+
+// === CUBS: Tomorrow's Game ===
+async function loadCubsTomorrow() {
+  const el = document.getElementById("cubsTomorrow");
+  try {
+    const tmrw = new Date(Date.now() + 864e5);
+    const dateStr = `${tmrw.getFullYear()}-${String(tmrw.getMonth()+1).padStart(2,'0')}-${String(tmrw.getDate()).padStart(2,'0')}`;
+    const url = `https://statsapi.mlb.com/api/v1/schedule?teamId=${CUBS_ID}&date=${dateStr}&sportId=1&hydrate=team,broadcasts,probablePitcher(stats(type=season))`;
+    const data = await (await fetch(url)).json();
+    const games = data.dates?.[0]?.games || [];
+
+    if (!games.length) {
+      el.innerHTML = `<div class="on-deck"><div class="on-deck-top"><div class="on-deck-body"><div class="on-deck-label">On Deck · Tomorrow</div><div class="on-deck-empty">No game scheduled</div></div></div></div>`;
+      return;
+    }
+
+    const g = games[0];
+    const ih = g.teams.home.team.id === CUBS_ID;
+    const opp = ih ? g.teams.away.team.teamName : g.teams.home.team.teamName;
+    const loc = ih ? 'Wrigley Field' : (g.venue?.name || 'Away');
+    const tv = getBroadcast(g.broadcasts);
+    const time = fmtTimeCT(g.gameDate);
+    const dayName = tmrw.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+    const dayNum = tmrw.getDate();
+
+    // Probable pitchers
+    const cp = ih ? g.teams.home.probablePitcher : g.teams.away.probablePitcher;
+    const op = ih ? g.teams.away.probablePitcher : g.teams.home.probablePitcher;
+
+    const fmtP = (p, team) => {
+      if (!p) return `<span class="on-deck-pitcher-line"><strong>${team}:</strong> TBD</span>`;
+      const s = p.stats?.[0]?.stats;
+      const stat = s ? ` (${s.wins||0}-${s.losses||0}, ${s.era||'-'})` : '';
+      return `<span class="on-deck-pitcher-line"><strong>${team}:</strong> ${p.fullName}${stat}</span>`;
+    };
+
+    el.innerHTML = `
+      <div class="on-deck">
+        <div class="on-deck-top">
+          <div class="on-deck-badge">
+            <span class="on-deck-badge-day">${dayName}</span>
+            <span class="on-deck-badge-date">${dayNum}</span>
+          </div>
+          <div class="on-deck-body">
+            <div class="on-deck-label">On Deck · Tomorrow</div>
+            <div class="on-deck-matchup">Cubs <span class="vs">vs</span> ${opp}</div>
+          </div>
+        </div>
+        <div class="on-deck-details">
+          <span class="on-deck-detail">🕐 <strong>${time}</strong></span>
+          <span class="on-deck-detail">📍 ${ih ? 'Home' : 'Away'} · ${loc}</span>
+          <span class="on-deck-detail">📺 <strong>${tv}</strong></span>
+        </div>
+        <div class="on-deck-pitchers">
+          <div class="on-deck-pitchers-label">Probable Starters</div>
+          ${fmtP(cp, 'CHC')}
+          ${fmtP(op, opp.substring(0,3).toUpperCase())}
+        </div>
+      </div>`;
+  } catch {
+    el.innerHTML = '';
+  }
+}
+
+// === SPORTS SCORES (Home Tab) ===
+const SPORTS_TEAMS = [
+  { name: 'Cubs', icon: '⚾', sport: 'baseball', league: 'mlb', teamId: 16 },
+  { name: 'Blues', icon: '🏒', sport: 'hockey', league: 'nhl', teamId: 19 },
+  { name: 'Virginia MBB', icon: '🏀', sport: 'basketball', league: 'mens-college-basketball', teamId: 258 },
+  { name: 'Virginia Baseball', icon: '⚾', sport: 'baseball', league: 'college-baseball', teamId: 258 }
+];
+
+async function loadSportsScores() {
+  const grid = document.getElementById('sportsGrid');
+  const cards = await Promise.all(SPORTS_TEAMS.map(async function(team) {
+    try {
+      const url = 'https://site.api.espn.com/apis/site/v2/sports/' + team.sport + '/' + team.league + '/teams/' + team.teamId + '/schedule';
+      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+      const data = await res.json();
+      const events = data.events || [];
+      const now = new Date();
+      const todayStr = now.toISOString().slice(0,10);
+
+      // Find: most recent completed, any live, next upcoming
+      let recent = null, live = null, upcoming = null;
+      for (let i = 0; i < events.length; i++) {
+        const ev = events[i];
+        const comp = ev.competitions?.[0];
+        if (!comp) continue;
+        const st = comp.status?.type?.state || ev.status?.type?.state || '';
+        const completed = st === 'post';
+        const inProgress = st === 'in';
+        const scheduled = st === 'pre';
+
+        if (inProgress) { live = ev; }
+        else if (completed) { recent = ev; }
+        else if (scheduled && !upcoming) { upcoming = ev; }
+      }
+
+      // Build card content
+      let gameHtml = '';
+
+      function renderGame(ev, label) {
+        const comp = ev.competitions?.[0];
+        if (!comp) return '';
+        const teams = comp.competitors || [];
+        const home = teams.find(function(t) { return t.homeAway === 'home'; }) || teams[0];
+        const away = teams.find(function(t) { return t.homeAway === 'away'; }) || teams[1];
+        if (!home || !away) return '';
+
+        const homeName = home.team?.abbreviation || home.team?.shortDisplayName || '?';
+        const awayName = away.team?.abbreviation || away.team?.shortDisplayName || '?';
+        const homeScore = home.score?.displayValue || home.score || '';
+        const awayScore = away.score?.displayValue || away.score || '';
+        const st = comp.status?.type?.state || ev.status?.type?.state || 'pre';
+        const statusText = comp.status?.type?.shortDetail || ev.status?.type?.shortDetail || '';
+
+        var statusClass = st === 'in' ? 'live' : st === 'post' ? 'final' : 'scheduled';
+        var statusLabel = '';
+        if (st === 'in') {
+          statusLabel = statusText || 'LIVE';
+        } else if (st === 'post') {
+          statusLabel = 'Final';
+        } else {
+          // Scheduled: show date + time
+          var gDate = new Date(ev.date);
+          var isToday = gDate.toISOString().slice(0,10) === todayStr;
+          if (isToday) {
+            statusLabel = 'Today ' + gDate.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit',timeZone:'America/Chicago'}) + ' CT';
+          } else {
+            statusLabel = gDate.toLocaleDateString('en-US', {weekday:'short',month:'short',day:'numeric'}) + ' ' + gDate.toLocaleTimeString('en-US', {hour:'numeric',minute:'2-digit',timeZone:'America/Chicago'}) + ' CT';
+          }
+        }
+
+        var scoreHtml = '';
+        if (st !== 'pre') {
+          scoreHtml = '<div class="sport-game-score">' + awayName + ' ' + awayScore + ' – ' + homeName + ' ' + homeScore + '</div>';
+        } else {
+          scoreHtml = '<div class="sport-game-matchup">' + awayName + ' @ ' + homeName + '</div>';
+        }
+
+        return '<div class="sport-game"><div class="sport-game-status ' + statusClass + '">' + statusLabel + '</div>' + scoreHtml + '</div>';
+      }
+
+      if (live) gameHtml += renderGame(live);
+      if (recent) gameHtml += renderGame(recent);
+      if (upcoming) gameHtml += renderGame(upcoming);
+
+      if (!gameHtml) gameHtml = '<div class="sport-no-game">No recent or upcoming games</div>';
+
+      return '<div class="sport-card"><div class="sport-card-header"><span class="sport-card-icon">' + team.icon + '</span><span class="sport-card-team">' + team.name + '</span></div>' + gameHtml + '</div>';
+    } catch {
+      return '<div class="sport-card"><div class="sport-card-header"><span class="sport-card-icon">' + team.icon + '</span><span class="sport-card-team">' + team.name + '</span></div><div class="sport-no-game">Could not load</div></div>';
+    }
+  }));
+  grid.innerHTML = cards.join('');
+}
+
+// === STOCK TICKER ===
+// === HOME SUB-TAB SWITCHING ===
+function switchHomeTab(id) {
+  document.querySelectorAll('.home-subtab').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.home-subtab[data-hometab="${id}"]`).classList.add('active');
+  document.querySelectorAll('.home-subpanel').forEach(p => p.classList.remove('active'));
+  document.getElementById('home-' + id).classList.add('active');
+}
+
+// === MARKET INDEX CARDS ===
+const INDEX_SYMBOLS = [
+  { symbol: 'SPY', name: 'S&P 500' },
+  { symbol: 'DIA', name: 'Dow Jones' },
+  { symbol: 'QQQ', name: 'Nasdaq' }
+];
+
+async function loadIndexCards() {
+  const el = document.getElementById('indexCards');
+  const cards = await Promise.all(INDEX_SYMBOLS.map(async (idx) => {
+    const q = await fetchQuote(idx.symbol);
+    if (!q) return `<div class="index-card"><div class="index-card-name">${idx.name}</div><div class="index-card-price" style="color:var(--text-secondary);font-size:1rem">Unavailable</div></div>`;
+    const dir = q.change > 0.005 ? 'up' : q.change < -0.005 ? 'down' : 'flat';
+    const arrow = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '–';
+    const sign = q.change >= 0 ? '+' : '';
+    return `<div class="index-card">
+      <div class="index-card-name">${idx.name}</div>
+      <div class="index-card-price">$${q.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+      <span class="index-card-change ${dir}">${arrow} ${sign}${q.change.toFixed(2)} (${sign}${q.changePct.toFixed(2)}%)</span>
+    </div>`;
+  }));
+  el.innerHTML = cards.join('');
+}
+
+// === SECTOR PERFORMANCE ===
+const SECTORS = [
+  { symbol: 'XLK', name: 'Technology' },
+  { symbol: 'XLF', name: 'Financials' },
+  { symbol: 'XLE', name: 'Energy' },
+  { symbol: 'XLV', name: 'Healthcare' },
+  { symbol: 'XLY', name: 'Consumer Disc.' },
+  { symbol: 'XLP', name: 'Consumer Staples' },
+  { symbol: 'XLI', name: 'Industrials' },
+  { symbol: 'XLB', name: 'Materials' },
+  { symbol: 'XLRE', name: 'Real Estate' },
+  { symbol: 'XLU', name: 'Utilities' },
+  { symbol: 'XLC', name: 'Comm. Services' }
+];
+
+async function loadSectorPerf() {
+  const el = document.getElementById('sectorPerf');
+  const results = [];
+  const batchSize = 4;
+  for (let i = 0; i < SECTORS.length; i += batchSize) {
+    const batch = SECTORS.slice(i, i + batchSize);
+    const batchResults = await Promise.all(batch.map(s => fetchQuote(s.symbol)));
+    results.push(...batchResults.map((r, idx) => ({ ...SECTORS[i + idx], quote: r })));
+  }
+
+  // Sort by change % descending
+  results.sort((a, b) => {
+    const aChg = a.quote?.changePct || 0;
+    const bChg = b.quote?.changePct || 0;
+    return bChg - aChg;
+  });
+
+  const chips = results.map(s => {
+    if (!s.quote) return `<div class="sector-chip"><span class="sector-name">${s.name}</span><span class="sector-change flat">—</span></div>`;
+    const dir = s.quote.change > 0.005 ? 'up' : s.quote.change < -0.005 ? 'down' : 'flat';
+    const sign = s.quote.changePct >= 0 ? '+' : '';
+    return `<div class="sector-chip"><span class="sector-name">${s.name}</span><span class="sector-change ${dir}">${sign}${s.quote.changePct.toFixed(2)}%</span></div>`;
+  }).join('');
+
+  el.innerHTML = `<div class="sector-grid">${chips}</div>`;
+}
+
+// === NEWS BRIEFING ===
+const NEWS_FEEDS = [
+  { name: 'Top Headlines', url: 'https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en' },
+  { name: 'Business', url: 'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en' },
+  { name: 'Sports', url: 'https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp1ZEdvU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US:en' }
+];
+
+async function loadNews() {
+  const el = document.getElementById('newsContent');
+  let allHtml = '';
+  let sectionIdx = 0;
+
+  for (const feed of NEWS_FEEDS) {
+    try {
+      const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}&count=10`;
+      const data = await (await fetch(rssUrl, { signal: AbortSignal.timeout(10000) })).json();
+
+      if (data.status === 'ok' && data.items?.length) {
+        const items = data.items.slice(0, 10);
+        const sid = 'news-sec-' + sectionIdx;
+        allHtml += `<div class="news-section-title">${feed.name}</div><div class="news-list" id="${sid}">`;
+        items.forEach(function(item, i) {
+          const title = item.title || '';
+          const parts = title.split(' - ');
+          const headline = parts.length > 1 ? parts.slice(0, -1).join(' - ') : title;
+          const source = parts.length > 1 ? parts[parts.length - 1] : '';
+          const pubDate = item.pubDate ? new Date(item.pubDate) : null;
+          const timeAgo = pubDate ? getTimeAgo(pubDate) : '';
+          const hidden = i >= 5 ? ' style="display:none" data-extra="' + sid + '"' : '';
+
+          allHtml += `<a class="news-item"${hidden} href="${item.link || '#'}" target="_blank" rel="noopener">
+            <div class="news-headline">${headline}</div>
+            <div class="news-meta">${source ? '<span class="news-source">' + source + '</span>' : ''}${source && timeAgo ? ' · ' : ''}${timeAgo}</div>
+          </a>`;
+        });
+        if (items.length > 5) {
+          allHtml += `<button class="news-view-more" data-section="${sid}" onclick="toggleNewsSection(this)">View More ▾</button>`;
+        }
+        allHtml += '</div>';
+        sectionIdx++;
+      }
+    } catch {}
+  }
+
+  if (allHtml) {
+    el.innerHTML = allHtml;
+  } else {
+    el.innerHTML = '<div class="news-loading"><span>News unavailable — check back later</span></div>';
+  }
+}
+
+function toggleNewsSection(btn) {
+  const sid = btn.getAttribute('data-section');
+  const extras = document.querySelectorAll('[data-extra="' + sid + '"]');
+  const expanded = btn.classList.toggle('expanded');
+  extras.forEach(function(el) { el.style.display = expanded ? '' : 'none'; });
+  btn.textContent = expanded ? 'View Less ▴' : 'View More ▾';
+}
+
+function getTimeAgo(date) {
+  const now = new Date();
+  const diff = Math.floor((now - date) / 1000);
+  if (diff < 60) return 'just now';
+  if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+  if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+  if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+// === STOCK TICKER ===
+const TICKER_SYMBOLS = ['SPY','DIA','QQQ','AAPL','MSFT','GOOGL','AMZN','TSLA','NVDA','META','BRK-B','JPM','V','UNH','WMT'];
+
+const PROXIES = [
+  url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+  url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`
+];
+
+async function fetchWithProxy(url, timeout = 10000) {
+  for (const makeProxy of PROXIES) {
+    try {
+      const res = await fetch(makeProxy(url), { signal: AbortSignal.timeout(timeout) });
+      if (res.ok) {
+        const text = await res.text();
+        return JSON.parse(text);
+      }
+    } catch {}
+  }
+  return null;
+}
+
+async function fetchQuote(symbol) {
+  try {
+    const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=1d&interval=1d`;
+    const data = await fetchWithProxy(url);
+    if (!data?.chart?.result?.[0]) return null;
+    const meta = data.chart.result[0].meta;
+    const price = meta.regularMarketPrice;
+    const prevClose = meta.chartPreviousClose || meta.previousClose;
+    if (!price || !prevClose) return null;
+    const change = price - prevClose;
+    const changePct = (change / prevClose) * 100;
+    return { symbol, price, change, changePct };
+  } catch {
+    return null;
+  }
+}
+
+function renderTicker(quotes) {
+  const wrap = document.getElementById('tickerWrap');
+  if (!quotes.length) {
+    wrap.innerHTML = `<div class="ticker-loading"><span>Market data unavailable — markets may be closed</span></div>`;
+    return;
+  }
+  const items = quotes.map(q => {
+    const dir = q.change > 0.005 ? 'up' : q.change < -0.005 ? 'down' : 'flat';
+    const arrow = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '–';
+    const sign = q.change >= 0 ? '+' : '';
+    return `<div class="ticker-item">
+      <span class="ticker-symbol">${q.symbol}</span>
+      <span class="ticker-price">$${q.price.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}</span>
+      <span class="ticker-change ${dir}">${arrow} ${sign}${q.changePct.toFixed(2)}%</span>
+    </div>`;
+  }).join('');
+  wrap.innerHTML = `<div class="ticker-track">${items}${items}</div>`;
+}
+
+async function loadStockTicker() {
+  const wrap = document.getElementById('tickerWrap');
+  wrap.innerHTML = `<div class="ticker-loading"><div class="spinner" style="border-top-color:rgba(255,255,255,0.5)"></div><span>Loading market data…</span></div>`;
+  // Fetch in small batches to avoid overwhelming proxies
+  const batchSize = 5;
+  const results = [];
+  for (let i = 0; i < TICKER_SYMBOLS.length; i += batchSize) {
+    const batch = TICKER_SYMBOLS.slice(i, i + batchSize);
+    const batchResults = await Promise.all(batch.map(s => fetchQuote(s)));
+    results.push(...batchResults);
+  }
+  const valid = results.filter(Boolean);
+  renderTicker(valid);
+}
+
+// === UVA BASKETBALL ===
+const UVA_ESPN_ID = 258;
+const UVA_ESPN_BASE = 'https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball';
+
+async function loadUvaGame() {
+  const hero = document.getElementById('uvaGameHero');
+  try {
+    const data = await (await fetch(UVA_ESPN_BASE + '/teams/' + UVA_ESPN_ID + '/schedule', {signal: AbortSignal.timeout(10000)})).json();
+    const events = data.events || [];
+    const now = new Date();
+
+    // Find most recent completed game
+    let lastGame = null;
+    let liveGame = null;
+    for (const ev of events) {
+      const state = ev.competitions?.[0]?.status?.type?.state;
+      if (state === 'post') lastGame = ev;
+      if (state === 'in') liveGame = ev;
+    }
+
+    const game = liveGame || lastGame;
+    if (!game) {
+      hero.innerHTML = '<div class="game-hero-label">Virginia Basketball</div><div class="no-game-msg">🏀 No recent game data available</div>';
+      return;
+    }
+
+    const comp = game.competitions[0];
+    const status = comp.status;
+    const isLive = status?.type?.state === 'in';
+    const isFinal = status?.type?.state === 'post';
+
+    let uvaTeam = null, oppTeam = null;
+    for (const c of comp.competitors) {
+      if (c.team?.id == UVA_ESPN_ID) uvaTeam = c;
+      else oppTeam = c;
+    }
+
+    var extractScore = function(c) {
+      if (!c) return '0';
+      var s = c.score;
+      if (s == null) return '0';
+      if (typeof s === 'number') return String(s);
+      if (typeof s === 'string' && s.trim() !== '') return s;
+      if (typeof s === 'object') {
+        var v = s.displayValue || s.value;
+        if (v != null) return String(v);
+      }
+      return '0';
+    };
+    const uvaScore = extractScore(uvaTeam);
+    const oppScore = extractScore(oppTeam);
+    const oppName = String(oppTeam?.team?.shortDisplayName || oppTeam?.team?.displayName || oppTeam?.team?.name || 'Opponent');
+    const oppAbbr = String(oppTeam?.team?.abbreviation || oppName.slice(0,3).toUpperCase());
+    const isHome = uvaTeam?.homeAway === 'home';
+    const venue = String(comp.venue?.fullName || (isHome ? 'John Paul Jones Arena' : 'Away'));
+    const won = uvaTeam?.winner === true || (uvaTeam?.winner !== false && parseInt(uvaScore) > parseInt(oppScore));
+
+    const broadcasts = comp.broadcasts?.flatMap(b => b.names || []) || [];
+    const tv = broadcasts.length ? broadcasts[0] : 'TBD';
+
+    const gameDate = new Date(game.date);
+    const dateStr = gameDate.toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'});
+    const timeStr = gameDate.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', timeZone:'America/Chicago'}) + ' CT';
+
+    // Status label
+    let statusLabel = '';
+    if (isLive) {
+      const detail = status?.type?.detail || 'Live';
+      statusLabel = detail;
+    } else if (isFinal) {
+      statusLabel = 'Final';
+    }
+
+    let scoreHtml = '';
+    if (isFinal || isLive) {
+      scoreHtml = '<div class="game-info-item"><span class="game-info-label">' + statusLabel + '</span><span class="game-info-value">UVA ' + uvaScore + ' – ' + oppAbbr + ' ' + oppScore + '</span></div>';
+    }
+
+    // Try to get player stats from event summary
+    let statsHtml = '';
+    if (isFinal || isLive) {
+      try {
+        const summaryData = await (await fetch(UVA_ESPN_BASE + '/summary?event=' + game.id, {signal: AbortSignal.timeout(10000)})).json();
+        const boxscore = summaryData.boxscore;
+        if (boxscore?.players) {
+          let uvaPlayers = null;
+          for (const team of boxscore.players) {
+            if (team.team?.id == UVA_ESPN_ID) uvaPlayers = team;
+          }
+          if (uvaPlayers?.statistics) {
+            const statCats = uvaPlayers.statistics[0];
+            if (statCats?.athletes) {
+              const athletes = statCats.athletes;
+              const labels = statCats.labels || [];
+              const ptsIdx = labels.indexOf('PTS');
+              const rebIdx = labels.indexOf('REB');
+              const astIdx = labels.indexOf('AST');
+              const fgIdx = labels.indexOf('FG');
+
+              // Find top performers
+              let topScorer = null, topReb = null, topAst = null;
+              let maxPts = 0, maxReb = 0, maxAst = 0;
+
+              for (const a of athletes) {
+                if (!a.stats || a.didNotPlay) continue;
+                const pts = parseInt(a.stats[ptsIdx]) || 0;
+                const reb = parseInt(a.stats[rebIdx]) || 0;
+                const ast = parseInt(a.stats[astIdx]) || 0;
+                const fg = a.stats[fgIdx] || '';
+                const name = a.athlete?.shortName || a.athlete?.displayName || '';
+                if (pts > maxPts) { maxPts = pts; topScorer = {name, pts, fg}; }
+                if (reb > maxReb) { maxReb = reb; topReb = {name, reb}; }
+                if (ast > maxAst) { maxAst = ast; topAst = {name, ast}; }
+              }
+
+              if (topScorer || topReb || topAst) {
+                statsHtml = '<div class="game-batting-highlights">';
+                if (topScorer) {
+                  statsHtml += '<div style="margin-bottom:0.5rem"><div class="batting-section-label">🏀 Points Leader</div><div class="game-batting-row"><span class="batting-chip"><span class="bat-name">' + topScorer.name + '</span><span class="bat-stat">' + topScorer.pts + ' PTS' + (topScorer.fg ? ' (' + topScorer.fg + ' FG)' : '') + '</span></span></div></div>';
+                }
+                if (topReb) {
+                  statsHtml += '<div style="margin-bottom:0.5rem"><div class="batting-section-label">📊 Rebounds</div><div class="game-batting-row"><span class="batting-chip"><span class="bat-name">' + topReb.name + '</span><span class="bat-stat">' + topReb.reb + ' REB</span></span></div></div>';
+                }
+                if (topAst) {
+                  statsHtml += '<div><div class="batting-section-label">🎯 Assists</div><div class="game-batting-row"><span class="batting-chip"><span class="bat-name">' + topAst.name + '</span><span class="bat-stat">' + topAst.ast + ' AST</span></span></div></div>';
+                }
+                statsHtml += '</div>';
+              }
+            }
+          }
+        }
+      } catch {}
+    }
+
+    const heroLabel = isLive ? 'Live Now' : isFinal ? (won ? '✓ Victory' : 'Final') : 'Last Game';
+
+    hero.innerHTML =
+      '<div class="game-hero-label">' + heroLabel + ' · ' + dateStr + '</div>' +
+      '<div class="game-matchup">' + (isHome ? 'Virginia <span class="vs">vs</span> ' + oppName : 'Virginia <span class="vs">@</span> ' + oppName) + '</div>' +
+      '<div class="game-info-row">' +
+        scoreHtml +
+        '<div class="game-info-item"><span class="game-info-label">' + (isFinal ? 'Tip-Off' : 'Tip-Off') + '</span><span class="game-info-value">' + timeStr + '</span></div>' +
+        '<div class="game-info-item"><span class="game-info-label">Where</span><span class="game-info-value">' + venue + '</span></div>' +
+        '<div class="game-info-item"><span class="game-info-label">TV</span><span class="game-info-value">' + tv + '</span></div>' +
+      '</div>' +
+      statsHtml;
+  } catch {
+    hero.innerHTML = '<div class="game-hero-label">Virginia Basketball</div><div class="no-game-msg">⚠ Could not load game info</div>';
+  }
+}
+
+async function loadUvaNextGame() {
+  const el = document.getElementById('uvaNextGame');
+  try {
+    const data = await (await fetch(UVA_ESPN_BASE + '/teams/' + UVA_ESPN_ID + '/schedule', {signal: AbortSignal.timeout(10000)})).json();
+    const events = data.events || [];
+    const now = new Date();
+
+    let nextGame = null;
+    for (const ev of events) {
+      const state = ev.competitions?.[0]?.status?.type?.state;
+      if (state === 'pre' && new Date(ev.date) > now) {
+        nextGame = ev;
+        break;
+      }
+    }
+
+    if (!nextGame) {
+      el.innerHTML = '<div class="on-deck"><div class="on-deck-top"><div class="on-deck-body"><div class="on-deck-label">Up Next</div><div class="on-deck-empty">No upcoming game scheduled</div></div></div></div>';
+      return;
+    }
+
+    const comp = nextGame.competitions[0];
+    let uvaTeam = null, oppTeam = null;
+    for (const c of comp.competitors) {
+      if (c.team?.id == UVA_ESPN_ID) uvaTeam = c;
+      else oppTeam = c;
+    }
+
+    const oppName = String(oppTeam?.team?.shortDisplayName || oppTeam?.team?.displayName || oppTeam?.team?.name || 'TBD');
+    const isHome = uvaTeam?.homeAway === 'home';
+    const venue = String(comp.venue?.fullName || (isHome ? 'John Paul Jones Arena' : 'Away'));
+    const broadcasts = comp.broadcasts?.flatMap(b => b.names || []) || [];
+    const tv = broadcasts.length ? String(broadcasts[0]) : 'TBD';
+
+    const gameDate = new Date(nextGame.date);
+    const dayName = gameDate.toLocaleDateString('en-US', {weekday:'short'}).toUpperCase();
+    const dayNum = gameDate.getDate();
+    const monthDay = gameDate.toLocaleDateString('en-US', {month:'short', day:'numeric'});
+    const timeStr = gameDate.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit', timeZone:'America/Chicago'}) + ' CT';
+
+    el.innerHTML =
+      '<div class="on-deck"><div class="on-deck-top">' +
+        '<div class="on-deck-badge"><span class="on-deck-badge-day">' + dayName + '</span><span class="on-deck-badge-date">' + dayNum + '</span></div>' +
+        '<div class="on-deck-body">' +
+          '<div class="on-deck-label">Up Next · ' + monthDay + '</div>' +
+          '<div class="on-deck-matchup">' + (isHome ? 'Virginia <span class="vs">vs</span> ' : 'Virginia <span class="vs">@</span> ') + oppName + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="on-deck-details">' +
+        '<span class="on-deck-detail">🕐 <strong>' + timeStr + '</strong></span>' +
+        '<span class="on-deck-detail">📍 <strong>' + (isHome ? 'Home' : 'Away') + '</strong> · ' + venue + '</span>' +
+        '<span class="on-deck-detail">📺 <strong>' + tv + '</strong></span>' +
+      '</div></div>';
+  } catch {
+    el.innerHTML = '<div class="on-deck"><div class="on-deck-top"><div class="on-deck-body"><div class="on-deck-label">Up Next</div><div class="on-deck-empty">⚠ Could not load schedule</div></div></div></div>';
+  }
+}
+
+async function loadUvaStandings() {
+  const el = document.getElementById('uvaStandings');
+  try {
+    // Try multiple ESPN endpoints for ACC standings
+    let data = null;
+    const yr = new Date().getFullYear();
+    const endpoints = [
+      'https://site.api.espn.com/apis/v2/sports/basketball/mens-college-basketball/standings?season=' + yr + '&group=2',
+      'https://site.api.espn.com/apis/v2/sports/basketball/mens-college-basketball/standings?group=2',
+      UVA_ESPN_BASE + '/standings?season=' + yr + '&group=2',
+      UVA_ESPN_BASE + '/standings?group=2'
+    ];
+
+    for (const url of endpoints) {
+      try {
+        const resp = await fetch(url, {signal: AbortSignal.timeout(8000)});
+        if (resp.ok) {
+          data = await resp.json();
+          // Check if we got actual entries
+          const entries = data.standings?.entries || data.children?.[0]?.standings?.entries || [];
+          if (entries.length > 0) break;
+        }
+      } catch {}
+    }
+
+    if (!data) { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load standings</div>'; return; }
+
+    // Handle different data shapes
+    let entries = data.standings?.entries || [];
+    if (!entries.length && data.children) {
+      for (const child of data.children) {
+        const ce = child.standings?.entries || [];
+        if (ce.length > 0) { entries = ce; break; }
+      }
+    }
+
+    if (!entries.length) { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">ACC standings not yet available</div>'; return; }
+
+    const teams = entries.map(function(e) {
+      const stats = {};
+      (e.stats || []).forEach(function(s) { stats[s.name || s.abbreviation || s.type] = s.displayValue || String(s.value || ''); });
+      return {
+        name: String(e.team?.shortDisplayName || e.team?.displayName || e.team?.name || '?'),
+        id: e.team?.id,
+        rank: parseInt(e.team?.rank) || parseInt(stats.rank) || 0,
+        w: parseInt(stats.overall_wins || stats.wins || '0') || 0,
+        l: parseInt(stats.overall_losses || stats.losses || '0') || 0,
+        streak: stats.streak || '-'
+      };
+    });
+
+    // Try to fetch rankings separately
+    try {
+      const rankData = await (await fetch('https://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/rankings', {signal: AbortSignal.timeout(5000)})).json();
+      const polls = rankData.rankings || [];
+      const ap = polls.find(function(p) { return p.type === 'ap' || p.name?.includes('AP'); }) || polls[0];
+      if (ap?.ranks) {
+        var rankMap = {};
+        for (var r = 0; r < ap.ranks.length; r++) {
+          var entry = ap.ranks[r];
+          rankMap[entry.team?.id] = entry.current;
+        }
+        for (var t = 0; t < teams.length; t++) {
+          if (rankMap[teams[t].id]) teams[t].rank = rankMap[teams[t].id];
+        }
+      }
+    } catch {}
+
+    teams.sort(function(a, b) {
+      if (b.w !== a.w) return b.w - a.w;
+      return a.l - b.l;
+    });
+
+    var rows = teams.map(function(t) {
+      var isUva = t.id == UVA_ESPN_ID;
+      var nameStr = (t.rank > 0 && t.rank <= 25 ? '<span style="color:#E57200;font-weight:700;font-size:0.75rem;margin-right:3px">#' + t.rank + '</span> ' : '') + t.name;
+      return '<tr class="' + (isUva ? 'uva-row' : '') + '"><td>' + nameStr + '</td><td>' + t.w + '</td><td>' + t.l + '</td><td>' + t.streak + '</td></tr>';
+    }).join('');
+
+    el.innerHTML = '<table class="standings-table"><thead><tr><th>Team</th><th>W</th><th>L</th><th>STRK</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  } catch { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load standings</div>'; }
+}
+
+async function loadUvaRecent() {
+  const el = document.getElementById('uvaRecent');
+  try {
+    const data = await (await fetch(UVA_ESPN_BASE + '/teams/' + UVA_ESPN_ID + '/schedule', {signal: AbortSignal.timeout(10000)})).json();
+    const events = data.events || [];
+
+    var completed = [];
+    for (var i = 0; i < events.length; i++) {
+      var ev = events[i];
+      if (ev.competitions?.[0]?.status?.type?.state === 'post') completed.push(ev);
+    }
+
+    completed = completed.slice(-5);
+    if (!completed.length) { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">No recent completed games</div>'; return; }
+
+    var html = '<div class="recent-games-list">';
+    for (var j = completed.length - 1; j >= 0; j--) {
+      var g = completed[j];
+      var comp = g.competitions[0];
+      var uva = null, opp = null;
+      for (var k = 0; k < comp.competitors.length; k++) {
+        if (comp.competitors[k].team?.id == UVA_ESPN_ID) uva = comp.competitors[k];
+        else opp = comp.competitors[k];
+      }
+      // Robust score extraction — ESPN returns score in various formats
+      var extractScore = function(c) {
+        if (!c) return 0;
+        var s = c.score;
+        if (s == null) return 0;
+        if (typeof s === 'number') return s;
+        if (typeof s === 'string') { var n = parseInt(s); return isNaN(n) ? 0 : n; }
+        if (typeof s === 'object') {
+          var v = s.displayValue || s.value;
+          if (v != null) { var n = parseInt(String(v)); return isNaN(n) ? 0 : n; }
+        }
+        return 0;
+      };
+      var uvaScore = extractScore(uva);
+      var oppScore = extractScore(opp);
+      // Use ESPN winner property if available, fall back to score comparison
+      var won = uva?.winner === true || (uva?.winner !== false && uvaScore > oppScore);
+      var isHome = uva?.homeAway === 'home';
+      var oppAbbr = String(opp?.team?.abbreviation || opp?.team?.shortDisplayName || '???');
+      var dt = new Date(g.date).toLocaleDateString('en-US', {month:'short', day:'numeric'});
+
+      html += '<div class="recent-game"><div class="rg-badge ' + (won ? 'win' : 'loss') + '">' + (won ? 'W' : 'L') + '</div><div><div class="rg-opponent">' + (isHome ? 'vs' : '@') + ' ' + oppAbbr + '</div><div class="rg-date">' + dt + '</div></div><div class="rg-score">' + uvaScore + ' – ' + oppScore + '</div></div>';
+    }
+    html += '</div>';
+    el.innerHTML = html;
+  } catch { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load recent games</div>'; }
+}
+
+async function loadUvaRoster() {
+  const el = document.getElementById('uvaRoster');
+  try {
+    // Try roster endpoint first
+    let allPlayers = [];
+    try {
+      const rData = await (await fetch(UVA_ESPN_BASE + '/teams/' + UVA_ESPN_ID + '/roster', {signal: AbortSignal.timeout(10000)})).json();
+      // ESPN roster can be in rData.athletes (array of position groups) or flat array
+      if (rData.athletes && Array.isArray(rData.athletes)) {
+        for (const group of rData.athletes) {
+          if (group.items && Array.isArray(group.items)) {
+            // Position group format: {position: "Guards", items: [...]}
+            for (const p of group.items) {
+              var name = String(p.displayName || p.fullName || '').trim();
+              if (!name) continue;
+              allPlayers.push({name: name, num: p.jersey || '?', pos: p.position?.abbreviation || ''});
+            }
+          } else if (group.displayName || group.fullName) {
+            // Flat array format
+            var name = String(group.displayName || group.fullName || '').trim();
+            if (!name) continue;
+            allPlayers.push({name: name, num: group.jersey || '?', pos: group.position?.abbreviation || ''});
+          }
+        }
+      }
+    } catch {}
+
+    // Fallback: try team endpoint
+    if (!allPlayers.length) {
+      try {
+        const data = await (await fetch(UVA_ESPN_BASE + '/teams/' + UVA_ESPN_ID + '?enable=roster', {signal: AbortSignal.timeout(10000)})).json();
+        const athletes = data.team?.athletes || [];
+        for (var i = 0; i < athletes.length; i++) {
+          var a = athletes[i];
+          var name = String(a.displayName || a.fullName || '').trim();
+          if (!name) continue;
+          allPlayers.push({name: name, num: a.jersey || '?', pos: a.position?.abbreviation || ''});
+        }
+      } catch {}
+    }
+
+    if (!allPlayers.length) { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">Roster not available</div>'; return; }
+
+    // Group by position
+    var guards = [], forwards = [], centers = [];
+    for (var i = 0; i < allPlayers.length; i++) {
+      var p = allPlayers[i];
+      if (p.pos === 'C') centers.push(p);
+      else if (p.pos === 'F' || p.pos === 'PF' || p.pos === 'SF') forwards.push(p);
+      else guards.push(p);
+    }
+
+    var renderGroup = function(title, players) {
+      if (!players.length) return '';
+      var h = '<div class="roster-group-title">' + title + '</div><div class="roster-grid">';
+      for (var i = 0; i < players.length; i++) {
+        h += '<div class="roster-player"><span class="roster-player-name">#' + players[i].num + ' ' + players[i].name + '</span><span class="roster-player-pos">' + players[i].pos + '</span></div>';
+      }
+      h += '</div>';
+      return h;
+    };
+
+    el.innerHTML = renderGroup('Guards', guards) + renderGroup('Forwards', forwards) + renderGroup('Centers', centers);
+  } catch { el.innerHTML = '<div style="color:var(--text-secondary);font-size:0.9rem">⚠ Could not load roster</div>'; }
+}
+
+// === FOOD TAB ===
+function switchFoodTab(id) {
+  document.querySelectorAll('.food-subtab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.food-subpanel').forEach(p => p.classList.remove('active'));
+  document.querySelector('[data-foodtab="'+id+'"]').classList.add('active');
+  document.getElementById('food-'+id).classList.add('active');
+}
+
+const RECIPES = {
+  smoker: [
+    { name:'Texas-Style Brisket', tag:'Low & Slow', time:'12-14 hrs', temp:'225°F', protein:'Beef',
+      desc:'The king of the Traeger. Salt, pepper, patience — that\'s all it takes to earn a perfect bark and smoke ring.',
+      ingredients:['12-14 lb whole packer brisket','Coarse black pepper','Kosher salt','Yellow mustard (binder)','Beef tallow or butcher paper'],
+      steps:['Trim brisket fat cap to ¼ inch. Apply thin coat of mustard.','Season generously with a 50/50 mix of coarse pepper and kosher salt.','Smoke at 225°F fat-side down on the Traeger. Spritz with apple cider vinegar every hour after the first 3 hours.','When bark is set and internal temp hits 165°F (usually 6-8 hrs), wrap in butcher paper.','Return to smoker. Pull at 203°F when probe slides in like butter.','Rest in a cooler for at least 1 hour (2 is better). Slice against the grain.'],
+      tip:'The stall at 165°F is real — don\'t panic. The wrap helps push through it. Judge doneness by feel (probe tender), not just temp.' },
+    { name:'Smoked Baby Back Ribs', tag:'3-2-1 Method', time:'6 hrs', temp:'225°F', protein:'Pork',
+      desc:'The 3-2-1 method is foolproof. Three stages, perfect ribs every time.',
+      ingredients:['2 racks baby back ribs','Your favorite BBQ rub','Apple cider vinegar (spritz)','Brown sugar','Honey','Butter (1 stick, sliced)','BBQ sauce'],
+      steps:['Remove membrane from bone side. Apply rub generously on both sides. Let sit 30 min.','Smoke at 225°F for 3 hours, spritzing every 45 min.','Lay ribs on foil. Add butter pats, drizzle of honey, sprinkle of brown sugar. Wrap tight.','Return to Traeger for 2 hours at 225°F.','Unwrap, brush with BBQ sauce. Smoke unwrapped for 1 final hour.','Let rest 10 min. Slice between bones.'],
+      tip:'Bend test: pick up the rack with tongs in the middle — when the meat cracks on the surface but doesn\'t fall apart, they\'re done.' },
+    { name:'Smoked Salmon', tag:'Brined & Buttery', time:'3-4 hrs', temp:'180-200°F', protein:'Fish',
+      desc:'A beautiful golden fillet with a sweet-smoky glaze. Use alder or cherry pellets for the best flavor on fish.',
+      ingredients:['2 lb salmon fillet (skin-on)','½ cup brown sugar','¼ cup kosher salt','1 tbsp garlic powder','1 tsp black pepper','Maple syrup (glaze)','Fresh dill'],
+      steps:['Combine brown sugar, salt, garlic powder, and pepper. Coat salmon generously. Refrigerate uncovered on a rack for 4-8 hours.','Rinse brine off, pat dry. Let sit at room temp for 1 hour to form pellicle (tacky surface).','Smoke at 180°F for 2 hours.','Bump to 200°F and brush with maple syrup every 20 min.','Pull when internal hits 145°F and flesh flakes easily.','Rest 10 min. Garnish with fresh dill.'],
+      tip:'The pellicle is key — that tacky skin grabs smoke. Don\'t skip the air-dry step. A small fan speeds this up.' },
+    { name:'Pork Belly Burnt Ends', tag:'Meat Candy', time:'5 hrs', temp:'250°F', protein:'Pork',
+      desc:'Sweet, smoky, caramelized cubes of pork belly. These disappear before they hit the table.',
+      ingredients:['3-4 lb skinless pork belly','BBQ rub','1 cup BBQ sauce','½ cup honey','¼ cup brown sugar','2 tbsp butter, melted'],
+      steps:['Cut pork belly into 1½ inch cubes. Season generously with rub.','Smoke at 250°F for 3 hours until bark develops.','Transfer cubes to an aluminum pan. Toss with BBQ sauce, honey, brown sugar, and butter.','Cover pan with foil. Return to smoker for 1.5 hours.','Uncover, toss gently, cook 30 more min uncovered until glaze is sticky.','Serve with toothpicks — they won\'t last.'],
+      tip:'Don\'t cube too small — they shrink. 1.5 inches is the sweet spot. Want more bark? Skip the foil and just toss in the pan uncovered for the last 2 hours.' },
+    { name:'Competition-Style Wings', tag:'Crispy Smoked', time:'2 hrs', temp:'275-375°F', protein:'Chicken',
+      desc:'The Traeger two-step: low smoke then high heat blast gives you smoky flavor AND crispy skin.',
+      ingredients:['3 lbs chicken wings (flats & drumettes)','2 tbsp baking powder (not soda)','Your favorite wing rub','1 cup buffalo sauce or sweet chili glaze','Butter (4 tbsp, melted)'],
+      steps:['Pat wings completely dry. Toss with baking powder and rub.','Arrange on Traeger in single layer at 275°F for 45 min.','Crank to 375°F for 30-40 min, flipping once, until skin is crispy.','Toss in bowl with melted butter and wing sauce of choice.','Serve immediately with celery and blue cheese.'],
+      tip:'Baking powder is the secret weapon — it draws moisture out of the skin for serious crunch. Make sure it\'s aluminum-free baking powder, not baking soda.' },
+    { name:'Smoked Beef Short Ribs', tag:'Brisket on a Stick', time:'8-10 hrs', temp:'250°F', protein:'Beef',
+      desc:'Thick, meaty, and impossibly tender. Beef short ribs are like brisket\'s bolder cousin.',
+      ingredients:['4 bone-in beef short ribs (English cut, 2" thick)','Coarse salt & pepper (50/50)','Garlic powder','Onion powder','Beef broth (for spritzing)'],
+      steps:['Trim excess fat but leave a thin cap. Season heavily with salt, pepper, garlic, and onion powder.','Smoke bone-side down at 250°F. Do not open the lid for the first 3 hours.','Spritz with beef broth every 45 min after hour 3.','When bark is dark and internal hits 203-205°F (usually 8-10 hrs), probe should slide in with zero resistance.','Rest wrapped in butcher paper for 30-45 min.','Slice perpendicular to the bone. Serve as-is — no sauce needed.'],
+      tip:'Buy USDA Choice or Prime — the marbling matters enormously. Ask the butcher for English-cut, at least 2 inches thick with good meat-to-bone ratio.' },
+    { name:'Smoked Mac & Cheese', tag:'Ultimate Side', time:'2 hrs', temp:'225°F', protein:'Sides',
+      desc:'Creamy, smoky, crusty on top. This is the side that steals the show at any cookout.',
+      ingredients:['1 lb elbow macaroni, cooked al dente','4 cups sharp cheddar, shredded','2 cups smoked gouda, shredded','2 cups heavy cream','4 oz cream cheese','½ stick butter','Panko breadcrumbs','Paprika'],
+      steps:['In a pot, melt butter and cream cheese. Add heavy cream, stir until smooth.','Add cheddar and gouda gradually, stirring until melted. Season with salt, pepper, dash of mustard powder.','Fold in cooked macaroni. Pour into aluminum half pan.','Top with panko and paprika.','Smoke at 225°F for 1.5-2 hours until edges bubble and top is golden.','Let rest 15 min for sauce to thicken.'],
+      tip:'Cook pasta 2 minutes short of al dente — it finishes cooking in the smoker. Smoked gouda adds a double-smoke depth that\'s incredible.' },
+    { name:'Smoked Tri-Tip', tag:'Santa Maria Style', time:'2.5 hrs', temp:'225-450°F', protein:'Beef',
+      desc:'West Coast\'s best kept secret. Reverse smoked for an edge-to-edge medium rare with killer bark.',
+      ingredients:['2-3 lb tri-tip roast','Coarse salt','Coarse black pepper','Garlic powder','Onion powder','Dried rosemary, crushed'],
+      steps:['Season tri-tip generously with salt, pepper, garlic, onion, and rosemary. Rest at room temp 45 min.','Smoke at 225°F until internal hits 120°F (about 1.5-2 hrs).','Pull and rest while you crank Traeger to 450°F.','Sear directly on grates 3-4 min per side until crust develops.','Rest 10 min. Internal should coast to 130-135°F for medium rare.','Slice thin against the grain — the grain changes direction mid-roast, so adjust your cuts.'],
+      tip:'Tri-tip has two grain directions — slice each half separately. Always slice thin. This cut is lean, so don\'t overcook past medium.' }
+  ],
+  grill: [
+    { name:'Reverse Seared Ribeye', tag:'Steakhouse Quality', time:'45 min', temp:'225→500°F', protein:'Beef',
+      desc:'Low and slow on the Traeger then screaming hot sear. Edge-to-edge pink with a steakhouse crust.',
+      ingredients:['2 ribeye steaks (1.5" thick)','Coarse salt','Coarse black pepper','Garlic powder','Butter (4 tbsp)','Fresh rosemary & thyme','3 cloves garlic, smashed'],
+      steps:['Season steaks with salt, pepper, garlic powder. Rest at room temp 45 min.','Set Traeger to 225°F. Place steaks on grates.','Smoke until internal hits 115°F (about 30-40 min for medium rare).','Pull steaks. Crank Traeger to max (500°F) or use a cast iron on a burner.','Sear 90 seconds per side. In the last 30 seconds, add butter, herbs, and garlic. Baste.','Rest 5-8 min. Finish with flaky salt.'],
+      tip:'Use an instant-read thermometer — it\'s the difference between a $60 steakhouse steak and a gray disappointment. Pull at 115°F; it\'ll coast to 130°F.' },
+    { name:'Cedar Plank Salmon', tag:'Pacific Northwest', time:'25 min', temp:'400°F', protein:'Fish',
+      desc:'Smoky, aromatic, and impossibly moist. The cedar plank does the heavy lifting.',
+      ingredients:['2 salmon fillets (6 oz each, skin on)','1 cedar plank (soaked 2 hrs)','2 tbsp Dijon mustard','1 tbsp maple syrup','1 tbsp soy sauce','1 clove garlic, minced','Lemon wedges','Fresh dill'],
+      steps:['Soak cedar plank in water at least 2 hours.','Mix Dijon, maple, soy, and garlic into a glaze.','Place plank on grill at 400°F. When it starts to smoke and crackle (5 min), place salmon on plank skin-side down.','Brush with glaze. Close lid.','Grill 12-15 min until salmon flakes at 140°F.','Serve on the plank with lemon and dill.'],
+      tip:'Keep a spray bottle nearby — cedar planks can catch fire at the edges. A little char is flavor, a lot is a problem.' },
+    { name:'Korean Bulgogi Skewers', tag:'Sweet & Smoky', time:'15 min', temp:'High', protein:'Beef',
+      desc:'Thin-sliced marinated beef that caramelizes beautifully over high heat. Addictive.',
+      ingredients:['2 lbs ribeye or sirloin, sliced ⅛" thin','½ cup soy sauce','3 tbsp brown sugar','2 tbsp sesame oil','1 Asian pear or apple, grated','5 cloves garlic, minced','1 tbsp ginger, grated','Green onions','Sesame seeds','Bamboo skewers (soaked)'],
+      steps:['Mix soy, sugar, sesame oil, pear, garlic, ginger. Marinate beef 2-6 hours.','Thread onto soaked skewers, weaving the thin slices.','Grill over high heat 2-3 min per side. The sugar will caramelize — that\'s what you want.','Garnish with sliced green onions and sesame seeds.','Serve with steamed rice, kimchi, and lettuce wraps.'],
+      tip:'Freeze the beef for 30 min before slicing — makes it much easier to get thin, even cuts. A sharp knife is essential.' },
+    { name:'Grilled Lamb Chops', tag:'Mediterranean', time:'12 min', temp:'High', protein:'Lamb',
+      desc:'Quick, elegant, and deceptively simple. The rosemary-garlic crust is pure flavor.',
+      ingredients:['8 lamb loin chops','4 cloves garlic, minced','2 tbsp fresh rosemary, finely chopped','2 tbsp olive oil','1 tbsp Dijon mustard','Salt and pepper','Lemon juice','Mint (for serving)'],
+      steps:['Mix garlic, rosemary, olive oil, and Dijon into a paste. Coat lamb chops. Marinate 1-4 hours.','Bring to room temp 30 min before grilling.','Grill over high heat: 3-4 min per side for medium rare (130°F internal).','Rest 5 min.','Squeeze fresh lemon over top. Serve with fresh mint.'],
+      tip:'Lamb chops cook fast — stay at the grill. The difference between perfect and overdone is about 60 seconds per side.' },
+    { name:'Grilled Street Tacos', tag:'Carne Asada', time:'20 min', temp:'High', protein:'Beef',
+      desc:'Charred skirt steak, warm tortillas, fresh salsa. Simple, loud flavors.',
+      ingredients:['2 lbs skirt steak','3 limes (juice)','4 cloves garlic, minced','1 jalapeño, minced','¼ cup cilantro, chopped','2 tbsp olive oil','1 tsp cumin','Small corn tortillas','White onion, diced','Fresh cilantro & lime wedges'],
+      steps:['Combine lime juice, garlic, jalapeño, cilantro, oil, and cumin. Marinate steak 2-4 hours.','Grill over high heat 3-4 min per side for medium rare. Get a good char.','Rest 5 min, then slice thin against the grain.','Warm tortillas directly on grill grates, 30 sec per side.','Load tortillas with steak, fresh onion, cilantro, lime squeeze.'],
+      tip:'Cut against the grain in short, thin slices — skirt steak has long, visible fibers. Cutting across them makes it tender.' },
+    { name:'Spatchcock Chicken', tag:'Whole Bird, Fast', time:'1 hr', temp:'375°F', protein:'Chicken',
+      desc:'Flatten the bird, crank the heat. Crispy skin all over, done in an hour.',
+      ingredients:['1 whole chicken (4-5 lbs)','2 tbsp olive oil','2 tsp paprika','1 tsp garlic powder','1 tsp onion powder','½ tsp cayenne','Salt & pepper','Lemon halves'],
+      steps:['Flip chicken breast-down. Cut along both sides of backbone with kitchen shears. Remove it.','Flip and press flat on the breastbone — you\'ll hear it crack.','Rub with oil. Season all over with paprika, garlic, onion, cayenne, salt, pepper.','Place skin-side up on Traeger at 375°F.','Grill 50-60 min until thigh hits 165°F and skin is deeply golden.','Rest 10 min. Carve.'],
+      tip:'Save the backbone in the freezer — after you collect 4-5, make a killer chicken stock. Spatchcocking cooks the bird 30% faster and the flat shape means even browning.' },
+    { name:'Grilled Swordfish Steaks', tag:'Bold & Simple', time:'12 min', temp:'High', protein:'Fish',
+      desc:'Meaty, firm, and perfect for the grill. This fish won\'t fall through the grates.',
+      ingredients:['2 swordfish steaks (1" thick)','3 tbsp olive oil','2 tbsp lemon juice','2 cloves garlic, minced','1 tsp oregano','Salt & pepper','Capers, lemon, parsley (for serving)'],
+      steps:['Combine olive oil, lemon, garlic, oregano. Marinate fish 30 min max.','Oil grill grates well. Heat to high.','Grill 4-5 min per side. Don\'t move it — let the grill marks set.','Internal should hit 130-135°F. It\'ll carry over to 140°F.','Top with capers, chopped parsley, squeeze of lemon, drizzle of olive oil.'],
+      tip:'Don\'t marinate swordfish more than 30 min — the acid starts to "cook" the surface and it gets mushy. Short marinate, hot grill, done.' },
+    { name:'Elote (Mexican Street Corn)', tag:'Perfect Side', time:'15 min', temp:'Medium-High', protein:'Sides',
+      desc:'Charred, creamy, tangy, spicy — the greatest grilled side dish ever invented.',
+      ingredients:['6 ears corn, husked','½ cup mayo','½ cup sour cream','1 cup cotija cheese, crumbled','Chili powder or Tajín','2 limes','Cilantro, chopped','1 clove garlic, minced'],
+      steps:['Grill corn over medium-high heat, turning every 2-3 min until charred all over (10-12 min total).','Mix mayo, sour cream, and garlic.','Slather grilled corn with the crema mixture while hot.','Roll in cotija cheese, dust with chili powder or Tajín.','Squeeze lime over top, garnish with cilantro.'],
+      tip:'The corn should be charred, not burned — you want blistered kernels, not blackened husks. The crema sticks best when the corn is still hot off the grill.' }
+  ],
+  kitchen: [
+    { name:'Cast Iron Filet Mignon', tag:'Date Night', time:'25 min', temp:'Oven 425°F', protein:'Beef',
+      desc:'Steakhouse-perfect filet with a butter baste. The cast iron does what a grill can\'t: constant contact.',
+      ingredients:['2 filet mignon (2" thick)','2 tbsp high-smoke-point oil','4 tbsp butter','3 cloves garlic, smashed','Fresh thyme & rosemary','Flaky sea salt','Coarse pepper'],
+      steps:['Pull steaks from fridge 45 min early. Season aggressively with salt and pepper.','Preheat cast iron on high for 5 full minutes. Preheat oven to 425°F.','Add oil. Sear steaks 2.5 min per side — don\'t touch them.','Add butter, garlic, herbs. Tilt pan and baste for 30 seconds.','Transfer entire pan to oven for 4-6 min (115°F for rare, 125°F for medium rare).','Rest 8 min. Spoon the garlic-herb butter over top.'],
+      tip:'The pan needs to be screaming hot before the steak touches it. If it doesn\'t sizzle violently on contact, it\'s not ready. Open a window — there will be smoke.' },
+    { name:'Braised Short Ribs', tag:'Slow Braise', time:'3.5 hrs', temp:'325°F', protein:'Beef',
+      desc:'Fork-tender beef in a rich, wine-dark sauce. This is Sunday cooking at its best.',
+      ingredients:['4 lbs bone-in short ribs','2 cups red wine (Cab or Merlot)','2 cups beef stock','1 onion, quartered','4 carrots, chunked','4 cloves garlic','2 tbsp tomato paste','Thyme, bay leaves','Flour for dredging'],
+      steps:['Season ribs with salt and pepper. Dredge lightly in flour.','Sear on all sides in a Dutch oven over high heat (3 min per side). Remove.','Sauté onion, carrots, garlic in the fat. Add tomato paste, cook 1 min.','Deglaze with wine. Scrape up all the fond. Reduce by half.','Add beef stock, thyme, bay leaves. Return ribs bone-side up.','Cover and braise in 325°F oven for 3 hours. Meat should be falling off the bone.','Skim fat from sauce. Reduce on stovetop if needed. Serve over mashed potatoes.'],
+      tip:'Use a wine you\'d actually drink — the flavor concentrates. Leftover sauce freezes beautifully and makes an instant weeknight meal over egg noodles.' },
+    { name:'Cajun Shrimp & Grits', tag:'Southern Classic', time:'40 min', temp:'Stovetop', protein:'Seafood',
+      desc:'Creamy, cheesy grits with spicy seared shrimp and a buttery pan sauce. Pure soul food.',
+      ingredients:['1 lb large shrimp, peeled','1 cup stone-ground grits','2 cups chicken stock + 2 cups whole milk','1 cup sharp cheddar','4 slices bacon, chopped','2 tbsp Cajun seasoning','3 cloves garlic','½ cup chicken stock (for sauce)','2 tbsp butter','Green onions, lemon'],
+      steps:['Bring stock and milk to boil. Stir in grits, reduce to low. Cook 25-30 min, stirring often.','Meanwhile, cook bacon until crispy. Remove bacon, keep fat in pan.','Season shrimp with Cajun spice. Sear in bacon fat 2 min per side. Remove.','Add garlic to pan, cook 30 sec. Add stock, butter, squeeze of lemon. Simmer 2 min.','Stir cheddar and butter into grits. Season with salt and pepper.','Serve grits in bowls, top with shrimp, sauce, bacon bits, and green onions.'],
+      tip:'Stone-ground grits take 30 min but have 10x the flavor of quick grits. Keep stirring or they\'ll stick. If they get too thick, add a splash of warm milk.' },
+    { name:'Pan-Seared Salmon', tag:'Crispy Skin', time:'15 min', temp:'Stovetop + Oven', protein:'Fish',
+      desc:'Restaurant-quality crispy skin, buttery flesh. Master this and you\'ll make it twice a week.',
+      ingredients:['2 salmon fillets (skin-on)','2 tbsp olive oil','2 tbsp butter','Lemon juice','Capers (optional)','Salt and pepper','Garlic, minced','Fresh dill or parsley'],
+      steps:['Pat salmon extremely dry with paper towels. Season skin and flesh with salt & pepper.','Heat olive oil in oven-safe skillet over medium-high until shimmering.','Place salmon skin-side down. Press gently with spatula for first 30 seconds.','Cook 4 min without moving — skin should be deeply golden and crispy.','Flip. Add butter and garlic. Cook 2 more minutes, basting.','Finish with lemon juice and herbs. Skin should crackle when you bite it.'],
+      tip:'Three secrets to crispy skin: bone dry surface, hot pan, and patience. Don\'t move the fish for 4 full minutes. The skin will release naturally when it\'s ready.' },
+    { name:'Chicken Parm', tag:'Italian-American', time:'45 min', temp:'Oven 425°F', protein:'Chicken',
+      desc:'Golden crust, tangy marinara, stretchy mozzarella. The comfort food hall of famer.',
+      ingredients:['4 chicken breasts, pounded to ½" thick','1 cup flour','3 eggs, beaten','2 cups panko + ½ cup Parmesan','2 cups marinara sauce','8 oz fresh mozzarella, sliced','Fresh basil','Olive oil for frying'],
+      steps:['Preheat oven to 425°F. Set up breading station: flour, eggs, panko-Parm mixture.','Dredge chicken: flour → egg → panko. Press coating firmly.','Pan-fry in ½ inch olive oil over medium-high, 3-4 min per side until golden.','Transfer to baking sheet. Spoon marinara over each piece.','Top with mozzarella slices.','Bake 12-15 min until cheese is bubbly and browned.','Top with fresh basil. Serve over spaghetti or with crusty bread.'],
+      tip:'Pound the chicken EVENLY to ½ inch — thick spots will be raw while thin spots overcook. Use a meat mallet between plastic wrap.' },
+    { name:'Beef Wellington', tag:'The Show-Stopper', time:'2 hrs', temp:'Oven 425°F', protein:'Beef',
+      desc:'Seared tenderloin wrapped in mushroom duxelles and puff pastry. Worth every minute of effort.',
+      ingredients:['2 lb center-cut beef tenderloin','1 lb mushrooms, finely chopped','4 slices prosciutto','1 sheet puff pastry (thawed)','2 tbsp Dijon mustard','2 shallots, minced','Fresh thyme','1 egg (egg wash)','Salt, pepper'],
+      steps:['Season beef aggressively. Sear all sides in screaming hot pan (90 sec per side). Brush with Dijon. Refrigerate.','Sauté mushrooms and shallots until ALL moisture is gone (15 min). Season, add thyme. Cool completely.','Lay plastic wrap, arrange prosciutto overlapping. Spread mushroom duxelles on top.','Place cold beef at edge. Roll tightly using plastic wrap. Twist ends tight. Refrigerate 30 min.','Unwrap, place on puff pastry. Roll up, seal edges. Egg wash all over. Score decoratively.','Bake at 425°F for 25-30 min until pastry is deep golden and internal temp is 125°F.','Rest 10 min before slicing.'],
+      tip:'The duxelles MUST be dry or the pastry gets soggy. Cook those mushrooms way longer than you think. And chill the beef before wrapping — warm meat melts the pastry.' },
+    { name:'Homemade Pasta & Bolognese', tag:'Sunday Sauce', time:'3 hrs', temp:'Stovetop', protein:'Beef/Pork',
+      desc:'Real Bolognese is a slow-simmered meat sauce — rich, silky, and nothing like the jar. Make the pasta by hand for extra credit.',
+      ingredients:['SAUCE: 1 lb ground beef, ½ lb ground pork, 1 can San Marzano tomatoes, 1 cup whole milk, 1 cup red wine, 2 carrots/2 celery/1 onion (finely diced), garlic, tomato paste, bay leaves, Parm rind','PASTA: 2 cups 00 flour, 3 eggs, 1 tbsp olive oil, pinch of salt'],
+      steps:['SAUCE: Brown beef and pork in batches — don\'t crowd. Remove.','Sauté onion, carrot, celery (soffritto) until soft, 10 min. Add garlic and tomato paste, cook 2 min.','Add wine, scrape fond. Add crushed tomatoes, milk, bay leaves, Parm rind. Return meat.','Simmer uncovered on lowest heat for 2.5-3 hrs, stirring occasionally. It should be thick and rich.','PASTA: Mound flour on counter, make well. Add eggs, oil, salt. Fork-mix gradually, then knead 10 min until smooth and elastic.','Rest dough 30 min wrapped in plastic. Roll thin, cut into pappardelle or tagliatelle.','Cook fresh pasta 2-3 min in salted water. Toss with sauce.'],
+      tip:'The milk in Bolognese isn\'t a mistake — it tenderizes the meat and gives the sauce a silky body. Traditional Bolognese barely looks red; it\'s a meat sauce, not a tomato sauce.' },
+    { name:'Garlic Butter Scallops', tag:'10-Minute Elegant', time:'10 min', temp:'Stovetop', protein:'Seafood',
+      desc:'Golden-crusted, buttery, and done in 10 minutes. The ultimate weeknight flex.',
+      ingredients:['12 large dry-packed sea scallops','3 tbsp butter','2 tbsp olive oil','4 cloves garlic, sliced','¼ cup white wine','Fresh lemon juice','Parsley, chopped','Flaky salt'],
+      steps:['Pat scallops VERY dry. Season with salt and pepper.','Heat oil in large skillet over high heat until it barely starts to smoke.','Place scallops, leaving 2 inches between each. Don\'t move them for 2 minutes.','Flip when deeply golden. Add butter and garlic.','Cook 90 more seconds, basting with the garlic butter.','Deglaze with wine and lemon. Spoon sauce over scallops. Garnish with parsley.'],
+      tip:'Dry-packed scallops are essential — "wet-packed" are soaked in preservatives and won\'t sear. They should smell like the ocean, not chemicals. Ask your fishmonger.' }
+  ]
+};
+
+const TIPS = {
+  smoker: [
+    { title:'The Clean Smoke Rule', body:'Thin blue smoke = flavor. Thick white smoke = bitter creosote. If you see white billowing smoke, open the lid and let the fire settle before cooking.' },
+    { title:'Traeger Startup Ritual', body:'Always start on Smoke with the lid OPEN for 5 min. This burns off initial dirty smoke. Then close the lid and set your temp. Your food will thank you.' },
+    { title:'The Spritz Debate', body:'Spritzing (apple cider vinegar or apple juice) keeps the surface moist for better smoke adhesion and bark development. Start after hour 2-3 when bark begins to set. Every 45 min is plenty.' },
+    { title:'Pellet Pairings', body:'Hickory & mesquite → beef. Cherry & apple → pork and chicken. Alder → fish and seafood. Competition blend → when in doubt, works with everything.' }
+  ],
+  grill: [
+    { title:'The Hand Test', body:'Hold your hand 5" above the grate. High heat = 2 sec before pulling away. Medium = 4-5 sec. Low = 8+ sec. It\'s not scientific, but it works in a pinch.' },
+    { title:'Two-Zone Setup', body:'Always have a hot side and a cool side. Sear on high, then move to indirect to finish. This gives you a crust without overcooking the center.' },
+    { title:'Let It Rest (Seriously)', body:'Resting is not optional. 5 min for steaks, 10 for chicken, 15+ for large cuts. The juices redistribute — cut too early and they\'re on the plate, not in the meat.' },
+    { title:'Clean Grates, Better Food', body:'Brush grates when they\'re HOT, not cold. Oil a folded paper towel with tongs and wipe after brushing. Clean grates = better sear and easier release.' }
+  ],
+  kitchen: [
+    { title:'Salt Early, Salt Often', body:'Season at every stage, not just at the end. Salt your pasta water, salt the meat before searing, season the sauce as you go. Layered seasoning creates depth.' },
+    { title:'Hot Pan, Cold Oil', body:'Heat the dry pan first, then add oil. When the oil shimmers (not smoking), add your food. This prevents sticking better than any nonstick coating.' },
+    { title:'Fond is Flavor', body:'Those brown bits stuck to the bottom of the pan after searing? That\'s fond — pure concentrated flavor. Deglaze with wine, stock, or even water and scrape it up for instant pan sauce.' },
+    { title:'Thermometer Over Timer', body:'Timers are guidelines. A good instant-read thermometer is the most important tool in your kitchen. It takes the guesswork out of every protein.' }
+  ]
+};
+
+function shuffleArray(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// === FAVORITES ===
+function getFavorites() {
+  try { return JSON.parse(localStorage.getItem('dadDashFavs') || '{}'); } catch { return {}; }
+}
+function saveFavorites(favs) {
+  try { localStorage.setItem('dadDashFavs', JSON.stringify(favs)); } catch {}
+}
+function isFavorite(category, recipeName) {
+  var favs = getFavorites();
+  var key = category + ':' + recipeName;
+  return !!favs[key];
+}
+function toggleFavorite(category, recipeName, event) {
+  if (event) { event.stopPropagation(); event.preventDefault(); }
+  var favs = getFavorites();
+  var key = category + ':' + recipeName;
+  if (favs[key]) { delete favs[key]; } else { favs[key] = true; }
+  saveFavorites(favs);
+  // Update the button state
+  var btns = document.querySelectorAll('[data-fav-key="' + key + '"]');
+  btns.forEach(function(btn) {
+    btn.classList.toggle('favorited', !!favs[key]);
+    btn.textContent = favs[key] ? '❤️' : '🤍';
+  });
+  // Update the card state
+  var cards = document.querySelectorAll('[data-recipe-key="' + key + '"]');
+  cards.forEach(function(card) { card.classList.toggle('is-fav', !!favs[key]); });
+  updateFavCounts();
+  // If we're in filter mode, re-render
+  if (document.getElementById(category + 'FavFilter').classList.contains('active')) {
+    renderRecipeGrid(category, true);
+  }
+}
+
+var favFilterState = { smoker: false, grill: false, kitchen: false };
+
+function toggleFavFilter(category) {
+  favFilterState[category] = !favFilterState[category];
+  document.getElementById(category + 'FavFilter').classList.toggle('active', favFilterState[category]);
+  renderRecipeGrid(category, favFilterState[category]);
+}
+
+function updateFavCounts() {
+  var favs = getFavorites();
+  ['smoker','grill','kitchen'].forEach(function(cat) {
+    var count = 0;
+    for (var key in favs) { if (key.startsWith(cat + ':') && favs[key]) count++; }
+    var el = document.getElementById(cat + 'FavCount');
+    if (el) el.textContent = count;
+  });
+}
+
+function renderFeatured(recipe, elId, category) {
+  var favKey = category + ':' + recipe.name;
+  var faved = isFavorite(category, recipe.name);
+  document.getElementById(elId).innerHTML =
+    '<div class="food-featured">' +
+      '<div class="food-featured-label">🔥 Featured · Try This</div>' +
+      '<div class="food-featured-title">' + recipe.name +
+        ' <button class="recipe-fav-btn ' + (faved ? 'favorited' : '') + '" data-fav-key="' + favKey + '" onclick="toggleFavorite(\'' + category + '\',\'' + recipe.name.replace(/'/g, "\\'") + '\', event)" style="font-size:1.1rem;vertical-align:middle">' + (faved ? '❤️' : '🤍') + '</button>' +
+      '</div>' +
+      '<div class="food-featured-desc">' + recipe.desc + '</div>' +
+      '<div class="food-featured-meta">' +
+        '<span>🕐 <strong>' + recipe.time + '</strong></span>' +
+        '<span>🌡️ <strong>' + recipe.temp + '</strong></span>' +
+        '<span>🥩 <strong>' + recipe.protein + '</strong></span>' +
+      '</div>' +
+      '<button class="food-featured-btn" onclick="this.closest(\'.food-featured\').nextElementSibling?.scrollIntoView({behavior:\'smooth\'})">See All Recipes ↓</button>' +
+    '</div>';
+}
+
+function renderRecipeCard(recipe, idx, category) {
+  var cardId = category + '-recipe-' + idx;
+  var favKey = category + ':' + recipe.name;
+  var faved = isFavorite(category, recipe.name);
+  var escapedName = recipe.name.replace(/'/g, "\\'");
+  var ingredients = recipe.ingredients.map(function(i) { return '<li>' + i + '</li>'; }).join('');
+  var steps = recipe.steps.map(function(s) { return '<li>' + s + '</li>'; }).join('');
+  var tipHtml = recipe.tip ? '<div class="recipe-protip"><strong>💡 Pro Tip:</strong> ' + recipe.tip + '</div>' : '';
+
+  return '<div class="recipe-card ' + (faved ? 'is-fav' : '') + '" data-recipe-key="' + favKey + '" onclick="toggleRecipe(\'' + cardId + '\')">' +
+    '<div class="recipe-card-top">' +
+      '<button class="recipe-fav-btn ' + (faved ? 'favorited' : '') + '" data-fav-key="' + favKey + '" onclick="toggleFavorite(\'' + category + '\',\'' + escapedName + '\', event)">' + (faved ? '❤️' : '🤍') + '</button>' +
+      '<div class="recipe-card-tag">' + recipe.tag + '</div>' +
+      '<div class="recipe-card-name">' + recipe.name + '</div>' +
+      '<div class="recipe-card-blurb">' + recipe.desc.substring(0, 90) + '…</div>' +
+    '</div>' +
+    '<div class="recipe-card-footer">' +
+      '<span>🕐 <strong>' + recipe.time + '</strong></span>' +
+      '<span>🌡️ <strong>' + recipe.temp + '</strong></span>' +
+      '<span>🥩 <strong>' + recipe.protein + '</strong></span>' +
+    '</div>' +
+    '<div class="recipe-detail" id="' + cardId + '">' +
+      '<h4>Ingredients</h4><ul>' + ingredients + '</ul>' +
+      '<h4>Steps</h4><ol>' + steps + '</ol>' +
+      tipHtml +
+    '</div>' +
+  '</div>';
+}
+
+function toggleRecipe(id) {
+  var el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+function renderRecipeGrid(category, favsOnly) {
+  var recipes = RECIPES[category];
+  var toRender = recipes;
+  if (favsOnly) {
+    toRender = recipes.filter(function(r) { return isFavorite(category, r.name); });
+  }
+  var gridHtml = '';
+  if (favsOnly && toRender.length === 0) {
+    gridHtml = '<div style="grid-column:1/-1;text-align:center;padding:2rem 0;color:var(--text-secondary)"><div style="font-size:1.5rem;margin-bottom:0.5rem">🤍</div><div style="font-size:0.9rem">No favorites saved yet</div><div style="font-size:0.82rem;margin-top:0.3rem">Tap the heart on any recipe to save it here</div></div>';
+  } else {
+    gridHtml = toRender.map(function(r, i) { return renderRecipeCard(r, i, category); }).join('');
+  }
+  document.getElementById(category + 'Recipes').innerHTML = gridHtml;
+}
+
+function renderTips(tips, elId) {
+  var html = '<div class="section-label" style="margin-top:0.5rem">Tips & Techniques</div>';
+  tips.forEach(function(t) {
+    html += '<div class="tip-card"><div class="tip-card-title">💡 ' + t.title + '</div><div class="tip-card-body">' + t.body + '</div></div>';
+  });
+  document.getElementById(elId).innerHTML = html;
+}
+
+function loadFoodTab() {
+  ['smoker','grill','kitchen'].forEach(function(cat) {
+    var recipes = RECIPES[cat];
+    var shuffled = shuffleArray(recipes);
+    renderFeatured(shuffled[0], cat + 'Featured', cat);
+    renderRecipeGrid(cat, false);
+    renderTips(TIPS[cat], cat + 'Tips');
+  });
+  updateFavCounts();
+}
+
+// === INIT ===
+function refreshAll() {
+  loadWeather();
+  loadSportsScores();
+  loadStockTicker();
+  loadIndexCards();
+  loadSectorPerf();
+  loadNews();
+  loadCubsGame();
+  loadCubsTomorrow();
+  loadCubsLineup();
+  loadCubsStandings();
+  loadCubsRecent();
+  loadCubsRoster();
+  loadUvaGame();
+  loadUvaNextGame();
+  loadUvaStandings();
+  loadUvaRecent();
+  loadUvaRoster();
+  loadFoodTab();
+  document.getElementById("lastUpdated").textContent = `Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`;
+}
+
+updateHeader();
+loadWeather();
+loadSportsScores();
+loadStockTicker();
+loadIndexCards();
+loadSectorPerf();
+loadNews();
+loadCubsGame();
+loadCubsTomorrow();
+loadCubsLineup();
+loadCubsStandings();
+loadCubsRecent();
+loadCubsRoster();
+loadUvaGame();
+loadUvaNextGame();
+loadUvaStandings();
+loadUvaRecent();
+loadUvaRoster();
+loadFoodTab();
+document.getElementById("lastUpdated").textContent = `Updated ${new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`;
+</script>
+</body>
+</html>
